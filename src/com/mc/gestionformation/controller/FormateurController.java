@@ -1,16 +1,23 @@
 package com.mc.gestionformation.controller;
 
-import java.time.LocalDate;
-
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.FormateurService;
+import com.mc.gestionformation.service.IFormateurService;
 
 public class FormateurController {
 
 	private Formateur formateur;
-	private FormateurService formateurService = new FormateurService();
+	private IFormateurService formateurService ;
+	
+	
+
+	public FormateurController(IFormateurService formateurService) {
+		super();
+		this.formateurService = formateurService;
+	}
 
 	public void BoutonEnregister() {
+		System.out.println("  IN CONTROLLER ...");
 		System.out.println(" Validation des données au niveau controller effectué ");
 		
 		formateur = formateurService.enregistrer(formateur);

@@ -5,11 +5,21 @@ import com.mc.gestionformation.model.Formateur;
 
 /// la couche service sert pour le controle et la validation des DTO et l'application d'aspects techniques
 // pattern façade 
-public class FormateurService {
+public class FormateurService implements IFormateurService {
 
-	FormateurBusiness formateurBusiness = new FormateurBusiness();
+	IFormateurService formateurBusiness;  // = new FormateurBusiness(); pour diminuer le couplage on éliminie l'instanciation 
+	
+	
+	public FormateurService(IFormateurService formateurBusiness) {
+		super();
+		this.formateurBusiness = formateurBusiness;
+	}
 
+	@Override
 	public Formateur enregistrer(Formateur formateur) {
+		System.out.println("  IN SERIVICE ...");
+		// ajout de l'aspet transaction
+		cache();
 		// ajout de l'aspet transaction
 		ouvrirTransaction();
 		// ajout de l'aspet securité
@@ -18,6 +28,11 @@ public class FormateurService {
 		}
 		fermerTransaction();
 		return formateur;
+	}
+
+	private void cache() {
+		System.out.println(" caching  ...");
+		
 	}
 
 	private boolean estAutorise() {
