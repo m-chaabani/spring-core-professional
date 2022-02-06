@@ -9,7 +9,7 @@ import com.mc.gestionformation.service.IFormateurService;
 public class FormateurView {
 	
 	public static void main(String[] args) {
-		System.out.println("  IN VIEW ...");
+		System.out.println("  START...");
 		IFormateurService formateurRealBusiness = new FormateurBusiness();
 		IFormateurService formateurBusinessPROXY = new FormateurService(formateurRealBusiness);
 
