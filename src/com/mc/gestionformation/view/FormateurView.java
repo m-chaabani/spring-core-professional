@@ -2,6 +2,7 @@ package com.mc.gestionformation.view;
 
 import com.mc.gestionformation.business.FormateurBusiness;
 import com.mc.gestionformation.controller.FormateurController;
+import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.FormateurService;
 import com.mc.gestionformation.service.IFormateurService;
@@ -9,6 +10,7 @@ import com.mc.gestionformation.service.IFormateurService;
 public class FormateurView {
 	
 	public static void main(String[] args) {
+		
 		System.out.println("  START...");
 		System.out.println("  IN VIEW START...");
 		IFormateurService formateurRealBusiness = new FormateurBusiness();
@@ -18,7 +20,13 @@ public class FormateurView {
 		Formateur formateur = new Formateur();
 		formateur.setNom("Noureddine");
 		formateur.setPrenom("BOUBEKEUR");
-		controller.setFormateur(formateur);
+		
+		FormateurDTO formateurDto = new FormateurDTO();
+		formateurDto.setFormateur(formateur);
+		
+		
+		
+		controller.setFormateurdto(formateurDto);
 		controller.BoutonEnregister();
 		System.out.println("  IN VIEW END...");
 	}

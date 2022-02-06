@@ -1,15 +1,12 @@
 package com.mc.gestionformation.controller;
 
-import com.mc.gestionformation.model.Formateur;
-import com.mc.gestionformation.service.FormateurService;
+import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.service.IFormateurService;
 
 public class FormateurController {
 
-	private Formateur formateur;
-	private IFormateurService formateurService ;
-	
-	
+	private FormateurDTO formateurdto;
+	private IFormateurService formateurService;
 
 	public FormateurController(IFormateurService formateurService) {
 		super();
@@ -19,18 +16,17 @@ public class FormateurController {
 	public void BoutonEnregister() {
 		System.out.println("  IN CONTROLLER ...");
 		System.out.println(" Validation des données au niveau controller effectué ");
-		
-		formateur = formateurService.enregistrer(formateur);
-		System.out.println(" Formateur enregistré avec success : " + formateur);
+
+		formateurdto = formateurService.enregistrer(formateurdto);
+		System.out.println(" Formateur enregistré avec success : " + formateurdto.getFormateur());
 	}
 
-	public Formateur getFormateur() {
-		return formateur;
+	public FormateurDTO getFormateurdto() {
+		return formateurdto;
 	}
 
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
+	public void setFormateurdto(FormateurDTO formateurdto) {
+		this.formateurdto = formateurdto;
 	}
-
 
 }
