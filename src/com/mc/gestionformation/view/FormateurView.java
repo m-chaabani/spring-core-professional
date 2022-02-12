@@ -3,6 +3,8 @@ package com.mc.gestionformation.view;
 import com.mc.gestionformation.business.FormateurBusiness;
 import com.mc.gestionformation.controller.FormateurController;
 import com.mc.gestionformation.dto.FormateurDTO;
+import com.mc.gestionformation.dto.FormateurDTOMapper;
+import com.mc.gestionformation.dto.FormateurDTOMapperImpl;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.FormateurService;
 import com.mc.gestionformation.service.IFormateurService;
@@ -21,10 +23,10 @@ public class FormateurView {
 		formateur.setNom("Noureddine");
 		formateur.setPrenom("BOUBEKEUR");
 		
-		FormateurDTO formateurDto = new FormateurDTO();
-		formateurDto.setFormateur(formateur);
+		FormateurDTOMapper formateurMapper = new FormateurDTOMapperImpl();
 		
-		
+		FormateurDTO formateurDto = formateurMapper.formateurToDTO(formateur);
+	
 		
 		controller.setFormateurdto(formateurDto);
 		controller.BoutonEnregister();
