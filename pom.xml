@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.mc.gestionFormation</groupId>
+		<artifactId>parentProject</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<!-- Ajouter le réfenrencement Relative : pour éviter d'avoir besoin de 
+			faire mvn install sur le projet parent pour qu'il soit visible -->
+		<relativePath>../parentProject/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>gestionFormation</artifactId>
+
+	<properties>
+		<spring-version>5.0.0</spring-version>
+		<url-ws-authentification>http://pom-default-props:4444</url-ws-authentification>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.9.0</version>
+				<configuration>
+					<!-- pour forcer l'utilisation de la version 11 de java sinon c'est 
+						la version 6 qui va être utilisé -->
+					<release>11</release>
+				</configuration>
+
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+    	<profile>
+			<id>dev</id>
+			<properties>
+				<url-ws-authentification>http://dev:4444</url-ws-authentification>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>rec</id>
+			<properties>
+				<url-ws-authentification>http://rec:4444</url-ws-authentification>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>prod</id>
+			<properties>
+				<url-ws-authentification>http://prod:4444</url-ws-authentification>
+			</properties>
+		</profile>
+
+	</profiles>
+</project>
