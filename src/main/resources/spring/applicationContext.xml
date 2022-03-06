@@ -1,2 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dbDriver>driver=${driver-db}</dbDriver>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="abstractDTO"
+		class="com.mc.gestionformation.dto.AbstractDTO" abstract="true">
+		<property name="utilisateur">
+			<bean class="com.mc.gestionformation.model.Utilisateur">
+				<property name="username" value="NOUREDDINE" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="formateurDTO" class="com.mc.gestionformation.dto.FormateurDTO"
+		parent="abstractDTO">
+		<property name="formateur" ref="formateur">
+			<!-- <bean id="formateur" -->
+			<!-- class="com.mc.gestionformation.model.Formateur"> -->
+			<!-- <property name="nom" value="CHAABANI"></property> -->
+			<!-- <property name="prenom" value="MONTASSAR"></property> -->
+			<!-- </bean> -->
+		</property>
+
+	</bean>
+
+	<bean id="formateur"
+		class="com.mc.gestionformation.model.Formateur">
+		<property name="nom" value="CHAABANI"></property>
+		<property name="prenom" value="MONTASSAR"></property>
+	</bean>
+
+
+<!-- 	FormateurController formateurController = new FormateurController(formateurBusiness); -->
+<!-- 	formateurController.setFormateurdto(formateurDTO); -->
+	<bean id="formateurController"
+		class="com.mc.gestionformation.controller.FormateurController">
+		<constructor-arg index="0" ref="formateurBusiness" />
+		<property name="formateurdto" ref="formateurDTO"></property>
+	</bean>
+	
+
+
+
+
+
+<!-- 	FormateurService formateurService = new FormateurService(formateurBusiness); -->
+	<bean id="formateurService"
+		class="com.mc.gestionformation.service.FormateurService">
+		<constructor-arg>
+			<ref bean="formateurBusiness" />
+		</constructor-arg>
+
+	</bean>
+	
+	<bean id="formateurBusiness"
+		class="com.mc.gestionformation.business.FormateurBusiness">
+		<constructor-arg index="0" ref="formateurDao" />
+	</bean>
+	<!-- 	FormateurBusiness formateurBusiness = new FormateurBusiness(formateurDao); -->
+
+	
+	<bean id="formateurDao"
+		class="com.mc.gestionformation.integration.dao.FormateurDaoInMemory" />
+<!-- 	FormateurDaoInMemory FormateurDaoInMemory = new FormateurDaoInMemory(); -->
+
+
+</beans>
