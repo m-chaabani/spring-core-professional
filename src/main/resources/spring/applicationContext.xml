@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:ctx="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="abstractDTO"
 		class="com.mc.gestionformation.dto.AbstractDTO" abstract="true">
@@ -13,10 +14,14 @@
 		</property>
 	</bean>
 
-	<bean id="formateurDTO" class="com.mc.gestionformation.dto.FormateurDTO"
-		parent="abstractDTO">
+
+	<!-- Phase 1 (construction ) FormateurDTO formateurDTO = new FormateurDTO(); 
+		Phase 1' ( création de la dépendance ) Formateur formateur = new Formateur() 
+		Setting nom et prenom phase 2 (Injection de dépendance formateurDTO.setFormateur(formateur) -->
+	<bean id="formateurDTO"
+		class="com.mc.gestionformation.dto.FormateurDTO" parent="abstractDTO">
 		<property name="formateur" ref="formateur">
-			<!-- <bean id="formateur" -->
+			<!--## 2 emme facon <bean id="formateur" -->
 			<!-- class="com.mc.gestionformation.model.Formateur"> -->
 			<!-- <property name="nom" value="CHAABANI"></property> -->
 			<!-- <property name="prenom" value="MONTASSAR"></property> -->
@@ -25,45 +30,65 @@
 
 	</bean>
 
-	<bean id="formateur"
+	<bean id="formateur1" name="formateur"
 		class="com.mc.gestionformation.model.Formateur">
 		<property name="nom" value="CHAABANI"></property>
 		<property name="prenom" value="MONTASSAR"></property>
 	</bean>
+	
+	<bean id="formateur2" name="formateur"
+		class="com.mc.gestionformation.model.Formateur">
+		<property name="nom" value="JALLALI"></property>
+		<property name="prenom" value="RAOUF"></property>
+	</bean>
 
 
-<!-- 	FormateurController formateurController = new FormateurController(formateurBusiness); -->
-<!-- 	formateurController.setFormateurdto(formateurDTO); -->
+	<!-- FormateurController formateurController = new FormateurController(formateurService); -->
+	<!-- formateurController.setFormateurdto(formateurDTO); -->
 	<bean id="formateurController"
 		class="com.mc.gestionformation.controller.FormateurController">
-		<constructor-arg index="0" ref="formateurBusiness" />
+		<constructor-arg index="0" ref="formateurService2" />
 		<property name="formateurdto" ref="formateurDTO"></property>
 	</bean>
-	
 
 
 
 
 
-<!-- 	FormateurService formateurService = new FormateurService(formateurBusiness); -->
+
+	<!-- FormateurService formateurService = new FormateurService(formateurBusiness); -->
 	<bean id="formateurService"
+		name="formateurService, formateurService2, formateurService"
 		class="com.mc.gestionformation.service.FormateurService">
 		<constructor-arg>
 			<ref bean="formateurBusiness" />
 		</constructor-arg>
 
 	</bean>
-	
+
 	<bean id="formateurBusiness"
 		class="com.mc.gestionformation.business.FormateurBusiness">
 		<constructor-arg index="0" ref="formateurDao" />
 	</bean>
-	<!-- 	FormateurBusiness formateurBusiness = new FormateurBusiness(formateurDao); -->
+	<!-- FormateurBusiness formateurBusiness = new FormateurBusiness(formateurDao); -->
 
-	
+
 	<bean id="formateurDao"
 		class="com.mc.gestionformation.integration.dao.FormateurDaoInMemory" />
-<!-- 	FormateurDaoInMemory FormateurDaoInMemory = new FormateurDaoInMemory(); -->
+	<!-- FormateurDaoInMemory FormateurDaoInMemory = new FormateurDaoInMemory(); -->
+
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n/messages"></property>
+
+	</bean>
+	
+	
+	<ctx:component-scan base-package="com.mc"></ctx:component-scan>
+	<ctx:annotation-config></ctx:annotation-config>
+	
+	
 
 
 </beans>
