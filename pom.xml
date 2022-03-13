@@ -18,6 +18,7 @@
 		<spring-version>5.0.0</spring-version>
 		<url-ws-authentification>http://pom-default-props:4444</url-ws-authentification>
 	</properties>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 		<dependency>
@@ -26,8 +27,29 @@
 			<version>5.3.15</version>
 		</dependency>
 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.6</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
 
 	</dependencies>
 

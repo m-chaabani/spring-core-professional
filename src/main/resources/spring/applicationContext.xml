@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
 	xmlns:ctx="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -35,8 +36,8 @@
 		<property name="nom" value="CHAABANI"></property>
 		<property name="prenom" value="MONTASSAR"></property>
 	</bean>
-	
-	<bean id="formateur2" name="formateur"
+
+	<bean id="formateur2" 
 		class="com.mc.gestionformation.model.Formateur">
 		<property name="nom" value="JALLALI"></property>
 		<property name="prenom" value="RAOUF"></property>
@@ -83,12 +84,14 @@
 		<property name="basename" value="i18n/messages"></property>
 
 	</bean>
-	
-	
+
+
 	<ctx:component-scan base-package="com.mc"></ctx:component-scan>
 	<ctx:annotation-config></ctx:annotation-config>
-	
-	
+
+
+
+
 
 
 </beans>
