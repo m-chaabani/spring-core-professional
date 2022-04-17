@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ public class FormateurBusiness implements IFormateurService {
 	// IFormateurDao formateurDao = new FormateurDaoInMemory() ;
 	IFormateurDao formateurDao = null;
 
-	
 	public FormateurBusiness() {
 		logger.info("[bean creation from FormateurBusiness with no-arg constructor]");
 	}
@@ -37,7 +35,7 @@ public class FormateurBusiness implements IFormateurService {
 	@Override
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
 		System.out.println("  IN BUSINESS ...");
-		System.out.println(" Enregisterment de l'objet Fomateur");
+		System.out.println(" Enregisterment de l'objet Formateur");
 		Formateur formateur = formateurDto.getFormateur();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());

@@ -27,20 +27,6 @@ public class FormateurDaoJDBC implements IFormateurDao {
 		return 1;
 	}
 
-	public void initIncrement() {
-
-		try (Connection conn = dataSource.getConnection();) {
-
-			PreparedStatement pst = conn.prepareStatement("ALTER TABLE FORMATEUR  ALTER COLUMN ID RESTART WITH 1");
-			pst.executeUpdate();
-
-		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-
-	}
 
 	@Override
 	public FormateurDTO create(FormateurDTO dto) {
@@ -72,6 +58,7 @@ public class FormateurDaoJDBC implements IFormateurDao {
 	}
 
 	@Override
+
 	public FormateurDTO update(FormateurDTO dto) {
 		try (Connection conn = dataSource.getConnection();) {
 
@@ -97,6 +84,7 @@ public class FormateurDaoJDBC implements IFormateurDao {
 	}
 
 	@Override
+
 	public FormateurDTO delete(FormateurDTO dto) {
 		try (Connection conn = dataSource.getConnection();) {
 
@@ -118,7 +106,7 @@ public class FormateurDaoJDBC implements IFormateurDao {
 
 	}
 
-	@Override
+
 	public FormateurDTO findById(FormateurDTO dto) {
 		return dto;
 
