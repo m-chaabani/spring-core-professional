@@ -38,7 +38,7 @@ public class MyFormateurFactory implements FormateurFactory {
 		IFormateurDao formateurDao = new FormateurDaoInMemory();
 		IFormateurService formateurBusiness = new FormateurBusiness(formateurDao);
 		IFormateurService formateurService = new FormateurService(formateurBusiness);
-		FormateurController controller = new FormateurController();
+		FormateurController controller = new FormateurController(formateurService);
 
 		components.put("myformateurDao", formateurDao);
 		components.put("myformateurBusiness", formateurBusiness);

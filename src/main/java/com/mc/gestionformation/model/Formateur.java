@@ -1,14 +1,27 @@
 package com.mc.gestionformation.model;
 
+import java.time.LocalDate;
+
+import org.springframework.context.annotation.Profile;
+
 public class Formateur extends AbstractEntity {
 
 	private String nom;
 	private String prenom;
 	private Utilisateur user;
 
-	
-	
 	public Formateur() {
+	}
+
+	public Formateur(Long id) {
+		this.id = id;
+
+	}
+
+	public Formateur(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
 	}
 
 	public String getNom() {
@@ -40,7 +53,5 @@ public class Formateur extends AbstractEntity {
 		return "Formateur [nom=" + nom + ", prenom=" + prenom + ", user=" + user + ", id=" + id + ", createdAt="
 				+ createdAt + ", modifiedAt=" + modifiedAt + "]";
 	}
-	
-	
 
 }

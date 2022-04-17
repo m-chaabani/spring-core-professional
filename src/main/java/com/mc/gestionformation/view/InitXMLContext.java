@@ -3,8 +3,6 @@ package com.mc.gestionformation.view;
 import java.util.Arrays;
 import java.util.Locale;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -15,38 +13,46 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.mc.gestionformation.controller.FormateurController;
 import com.mc.gestionformation.model.Formateur;
 
-@Component
 public class InitXMLContext {
 
 	private static final Logger logger = LoggerFactory.getLogger(InitXMLContext.class);
 
 	public static void main(String[] args) {
 		// useXMLBeanFactory();
-		useApplicatioContextWithClassPath();
+		// useApplicatioContextWithClassPath();
 		// useApplicatioContextWithFileSystem();
 		// getBean byType with many instance of that type
 
 		logger.info("Running ApplicationContext from {}", InitXMLContext.class.getSimpleName());
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
-		FormateurController formateurController = ctx.getBean(FormateurController.class);
-
-		formateurController.BoutonEnregister();
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml",
+//				"spring/applicationContext-infra.xml", "spring/applicationContext-security.xml");
 		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+		DriverManagerDataSource ds = ctx.getBean(DriverManagerDataSource.class);
+		System.out.println("ds.getPassword()" + ds.getPassword() );
+		System.out.println("ds.getUsername()" + ds.getUsername() );
+		System.out.println("ds.getUrl()" + ds.getUrl() );
 
+		
+	//	System.out.println(ctx.getBean("initConfig"));
+//        Arrays.asList(ctx.getBeanDefinitionNames() ).forEach(System.out::println);
+//		
+//		FormateurController formateurController = ctx.getBean(FormateurController.class);
+//		logger.info(ctx.getBean(Formateur.class).toString());
+//		formateurController.BoutonEnregister();
 
 	}
-
-
 
 	public static void useXMLBeanFactory() {
 		Resource resource = new ClassPathResource("classpath:spring/applicationContext.xml");
 		BeanFactory ctx = new XmlBeanFactory(resource);
+
 		FormateurController formateurController = ctx.getBean(FormateurController.class);
 		formateurController.BoutonEnregister();
 	}
@@ -124,7 +130,6 @@ public class InitXMLContext {
 		ctx.getBean(FormateurController.class).BoutonEnregister();
 	}
 
-
 	public static void useClassPathXmlApplicationContext() {
 		// creating the context
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
@@ -135,9 +140,6 @@ public class InitXMLContext {
 		// show all loaded beans
 		Arrays.stream(ctx.getBeanDefinitionNames()).forEach(System.out::println);
 
-	
 	}
-
-
 
 }

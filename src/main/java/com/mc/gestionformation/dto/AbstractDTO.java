@@ -7,8 +7,11 @@ import com.mc.gestionformation.model.Utilisateur;
 
 public abstract class AbstractDTO {
 	
+	protected List<Throwable> erreurs = new ArrayList<>();
+	protected boolean hasErros;
+	
 	protected Utilisateur utilisateur;
-	protected List<String> erreurs = new ArrayList<>();
+	
 	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -16,11 +19,18 @@ public abstract class AbstractDTO {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	public List<String> getErreurs() {
+	public List<Throwable> getErreurs() {
 		return erreurs;
 	}
-	public void setErreurs(List<String> erreurs) {
+	public void setErreurs(List<Throwable> erreurs) {
 		this.erreurs = erreurs;
+	}
+	
+	public boolean isHasErros() {
+		return hasErros;
+	}
+	public void setHasErros(boolean hasErros) {
+		this.hasErros = hasErros;
 	}
 	
 	

@@ -5,7 +5,7 @@ import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("MyContextEventListner")
 public class ContextEventListner {
 
 	@EventListener(classes = { ContextStoppedEvent.class })
