@@ -2,13 +2,13 @@ package com.mc.gestionformation.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
 import com.mc.gestionformation.dto.FormateurDTO;
@@ -18,14 +18,18 @@ import com.mc.gestionformation.model.Formateur;
 //FactoryBeanPostProcessor
 @Configuration
 @ComponentScan(basePackages = "com.mc")
-@ImportResource(locations = "classpath:spring/applicationContext.xml")
+@Import(DataSourceCfg.class)
+//@ImportResource(locations = "classpath:spring/applicationContext.xml")
 public class AppConfig {
 
 	Logger logger = LoggerFactory.getLogger(AppConfig.class);
 
+	@Autowired
+	DataSourceCfg dataSourceCfg;
+
 
 	@Bean
-	@Profile("test")
+//	@Profile("test")
 	FormateurDTO formateurDto21() {
 
 		FormateurDTO formateurDTO = new FormateurDTO();
@@ -34,7 +38,7 @@ public class AppConfig {
 	}
 
 	@Bean(name = "formateurDto20")
-	@Profile("production")
+//	@Profile("production")
 	@Scope("prototype")
 	@Lazy
 	FormateurDTO formateurDto2() {
