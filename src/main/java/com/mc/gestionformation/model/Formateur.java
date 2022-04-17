@@ -6,9 +6,18 @@ public class Formateur extends AbstractEntity {
 	private String prenom;
 	private Utilisateur user;
 
-	
-	
 	public Formateur() {
+	}
+
+	public Formateur(Long id) {
+		this.id = id;
+
+	}
+
+	public Formateur(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
 	}
 
 	public String getNom() {

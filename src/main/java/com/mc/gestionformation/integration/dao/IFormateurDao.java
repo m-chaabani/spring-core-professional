@@ -8,7 +8,7 @@ public interface IFormateurDao {
 
 	FormateurDTO update(FormateurDTO formateurDTO);
 
-	FormateurDTO delelte(FormateurDTO formateurDTO);
+	FormateurDTO delete(FormateurDTO formateurDTO);
 
 	FormateurDTO findById(FormateurDTO formateurDTO);
 
