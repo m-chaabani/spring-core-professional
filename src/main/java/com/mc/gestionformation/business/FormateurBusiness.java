@@ -14,16 +14,10 @@ import com.mc.gestionformation.integration.dao.IFormateurDao;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.IFormateurService;
 
-@Service("formateurBusiness2")
-@Primary
+@Service("formateurBusiness")
 public class FormateurBusiness implements IFormateurService {
 	private static Logger logger = LoggerFactory.getLogger(FormateurController.class);
-	// IFormateurDao formateurDao = new FormateurDaoInMemory() ;
 	IFormateurDao formateurDao = null;
-
-	public FormateurBusiness() {
-		logger.info("[bean creation from FormateurBusiness with no-arg constructor]");
-	}
 
   @Autowired
 	public FormateurBusiness(IFormateurDao formateurDao) {

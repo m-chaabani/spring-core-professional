@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 @PropertySource("classpath:db/db.properties")
 public class DataSourceCfg {
-// BY @VALUE
+
 	@Value("${db.driverClassName}")
 	private String driverClassName;
 
@@ -27,20 +27,6 @@ public class DataSourceCfg {
 
 	@Value("${db.password}")
 	private String password;
-	// BY @VALUE
-	
-//	OU BIEN 
-	
-	// BY Environment 
-	@Autowired
-	private Environment environment;
-	// BY Environment 
-	
-
-	// A faire pour la séance prochaine
-	// 1. Fichier properties pour les parametres de la DB
-	// 2. XML et JAVA_CONFIG propertyHolderConfiguerer
-	// 3. @PropertySource, @Value, Environement
 
 	@Bean
 	static PropertySourcesPlaceholderConfigurer propertySourcePlaceHolder() {
@@ -48,7 +34,6 @@ public class DataSourceCfg {
 	}
 
 	@Bean("dataSourceByValue")
-	//@Profile("ShowByValue")
 	DataSource datasourceValue() {
 
 		DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -59,58 +44,7 @@ public class DataSourceCfg {
 		return ds;
 	}
 	
-	@Bean("dataSourceByEnv")
-	DataSource datasourceEnv() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setUsername( environment.getProperty("db.username") );
-		ds.setPassword(environment.getProperty("db.password") );
-		ds.setUrl(environment.getProperty("db.url") );
-		ds.setDriverClassName(environment.getProperty("db.driverClassName") );
-		return ds;
-	}
-
-	@Configuration
-	@Profile("production")
-	static class ProductionDataSourceCfg {
-
-		private String driveClassName;
-		private String url;
-		private String username;
-		private String password;
-
-		@Bean
-		DataSource datasource() {
-			return null;
-		}
-
-	}
 	
-	void m() {
-		
-		//no sens
-		@Configuration
-		class localCnfigClass {
-			
-		}
-		
-	}
-
-	@Configuration
-	@Profile("dev")
-	static class DevDataSourceCfg {
-
-		private String driveClassName;
-		private String url;
-		private String username;
-		private String password;
-
-		@Bean
-		DataSource datasource() {
-			return null;
-		}
-
-	}
-
 	@Override
 	public String toString() {
 		return "DataSourceCfg [driverClassName=" + driverClassName + ", url=" + url + ", username=" + username
