@@ -2,6 +2,8 @@ package com.mc.gestionformation.dto;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.model.Formation;
 
@@ -34,9 +36,15 @@ public class FormateurDTO extends AbstractDTO {
 	public void setFormateurs(List<Formateur> formateurs) {
 		this.formateurs = formateurs;
 	}
+
+
+	private void init() {
+		System.out.println("init in FormateurDTO");
+	}
 	
-	
-	
-	
+	private void destroy() {
+		System.out.println("destroy resources in FormateurDTO before deletion");
+
+	}
 
 }

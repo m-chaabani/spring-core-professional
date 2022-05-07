@@ -1,16 +1,23 @@
 package com.mc.gestionformation.model;
 
-import java.time.LocalDate;
-
-import org.springframework.context.annotation.Profile;
-
-public class Formateur extends AbstractEntity {
+public class Formateur extends AbstractEntity  {
 
 	private String nom;
 	private String prenom;
 	private Utilisateur user;
+	private Float salaire;
+
+	public Float getSalaire() {
+
+		return salaire;
+	}
+
+	public void setSalaire(Float salaire) {
+		this.salaire = salaire;
+	}
 
 	public Formateur() {
+		salaire = (float) Math.random() * 100;
 	}
 
 	public Formateur(Long id) {
@@ -55,3 +62,5 @@ public class Formateur extends AbstractEntity {
 	}
 
 }
+
+

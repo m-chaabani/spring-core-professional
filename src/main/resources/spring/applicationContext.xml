@@ -14,12 +14,13 @@
 			</bean>
 		</property>
 	</bean>
-	
-	<bean class="com.mc.gestionformation.config.ExampleBean">
-	 <constructor-arg index="0" ref=""></constructor-arg>
-       
-     </bean>
-	
+
+	<bean class="com.mc.gestionformation.config.ExampleBean"
+		scope="" >
+		<constructor-arg index="0" ref=""></constructor-arg>
+
+	</bean>
+
 
 
 	<!-- Phase 1 (construction ) FormateurDTO formateurDTO = new FormateurDTO(); 
@@ -94,8 +95,8 @@
 	<!-- formateurController.setFormateurdto(formateurDTO); -->
 	<bean id="formateurControllerXML"
 		class="com.mc.gestionformation.controller.FormateurController"
-		 c:formateurService-ref="formateurServiceXML" >
-<!-- 		<constructor-arg index="0" ref="formateurServiceXML" /> -->
+		c:formateurService-ref="formateurServiceXML">
+		<!-- <constructor-arg index="0" ref="formateurServiceXML" /> -->
 		<property name="formateurdto" ref="formateurDTO"></property>
 	</bean>
 
@@ -130,9 +131,9 @@
 	<!-- FormateurDaoInMemory FormateurDaoInMemory = new FormateurDaoInMemory(); -->
 
 
-<!--     charge tous les @Component en particulier @Configuration BFPP  -->
+	<!-- charge tous les @Component en particulier @Configuration BFPP -->
 
-<!-- 	<context:component-scan base-package="com.mc.gestionfor" ></context:component-scan> -->
+	<!-- <context:component-scan base-package="com.mc.gestionfor" ></context:component-scan> -->
 	<context:annotation-config></context:annotation-config>
 	<bean class="com.mc.gestionformation.config.InitConfig"></bean>
 

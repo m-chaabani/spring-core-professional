@@ -19,19 +19,19 @@ import com.mc.gestionformation.service.IFormateurService;
 // bean creation : new FormateurController(ctx.getBean("formateurService") )
 @Profile("dev")
 public class FormateurController {
-
 	private static Logger logger = LoggerFactory.getLogger(FormateurController.class);
 
 	private FormateurDTO formateurdto;
 	private IFormateurService formateurService;
-
+	
+	
 //	public FormateurController() {
 //		super();
 //		logger.info("[bean creation from FormateurController with no-arg constructor]");
 //
 //	}
 
-	public FormateurController(IFormateurService formateurService) {
+	public FormateurController(@Qualifier("formateurBusiness")IFormateurService formateurService) {
 		super();
 		this.formateurService = formateurService;
 		logger.info("[bean creation from FormateurController with 1-arg constructor]");

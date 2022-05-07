@@ -14,6 +14,6 @@ public interface IFormateurDao {
 
 	FormateurDTO findById(FormateurDTO formateurDTO);
 
-	FormateurDTO findAll() throws SQLException;
+	FormateurDTO findAll();
 
 }

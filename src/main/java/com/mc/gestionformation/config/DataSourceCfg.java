@@ -12,11 +12,16 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+//db.username=admin
+//db.password=admin
+//db.url=jdbc:h2:./db/formationDB
+//db.driverClassName=
+
 @Configuration
 @PropertySource("classpath:db/db.properties")
 public class DataSourceCfg {
 // BY @VALUE
-	@Value("${db.driverClassName}")
+	@Value("${db.driverClassName}") //	@Value("org.h2.Driver")
 	private String driverClassName;
 
 	@Value("${db.url}")
@@ -46,6 +51,8 @@ public class DataSourceCfg {
 	static PropertySourcesPlaceholderConfigurer propertySourcePlaceHolder() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
+	
+	
 
 	@Bean("dataSourceByValue")
 	//@Profile("ShowByValue")

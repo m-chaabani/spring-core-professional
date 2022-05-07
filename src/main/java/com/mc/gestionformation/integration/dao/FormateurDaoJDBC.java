@@ -40,10 +40,15 @@ public class FormateurDaoJDBC implements IFormateurDao {
 			}
 
 			PreparedStatement pst = conn.prepareStatement(sql);
-			pst.setLong(3, dto.getFormateur().getId());
+			
 			pst.setString(1, dto.getFormateur().getPrenom());
 			pst.setString(2, dto.getFormateur().getNom());
+			
+				if (dto.getFormateur().getId() != null) {
+				pst.setLong(3, dto.getFormateur().getId());
+			}
 			pst.executeUpdate();
+		
 
 		} catch (SQLException sqlException) {
 			dto.setHasErros(true);
