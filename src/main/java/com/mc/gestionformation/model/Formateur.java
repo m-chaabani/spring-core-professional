@@ -1,15 +1,18 @@
 package com.mc.gestionformation.model;
 
-import java.time.LocalDate;
-
-import org.springframework.context.annotation.Profile;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Formateur extends AbstractEntity {
 
+	
 	private String nom;
 	private String prenom;
 	private Utilisateur user;
-
+	
+	private Set<Formation> formations = new HashSet<Formation>();
+	
+	
 	public Formateur() {
 	}
 
@@ -47,6 +50,15 @@ public class Formateur extends AbstractEntity {
 	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
+	
+	public Set<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(Set<Formation> formations) {
+		this.formations = formations;
+	}
+
 
 	@Override
 	public String toString() {

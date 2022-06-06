@@ -1668,3 +1668,97 @@ INSERT INTO FORMATEUR (FIRST_NAME, LAST_NAME   , ID ) VALUES (?,?,?) [90012-210]
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+2022-05-13 20:48:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE FORMATEUR ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) )"; attendu "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"
+Syntax error in SQL statement "CREATE TABLE FORMATEUR ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+CREATE TABLE FORMATEUR ( ID BIGINT IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) ) [42001-210]
+2022-05-13 20:49:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) )"; attendu "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"
+Syntax error in SQL statement "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+CREATE TABLE FORMATEUR_TEST ( ID BIGINT IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) ) [42001-210]
+2022-05-13 20:50:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) )"; attendu "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"
+Syntax error in SQL statement "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+CREATE TABLE FORMATEUR_TEST ( ID BIGINT IDENTITY PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) ) [42001-210]
+2022-05-13 20:53:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR(50) NOT NULL , PASSWORD VARCHAR(50) NOT NULL , FIRSTNAME VARCHAR(50) , LASTNAME VARCHAR(50) )"; attendu "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"
+Syntax error in SQL statement "CREATE TABLE FORMATEUR_TEST ( ID BIGINT [*]IDENTITY PRIMARY KEY , USERNAME VARCHAR(50) NOT NULL , PASSWORD VARCHAR(50) NOT NULL , FIRSTNAME VARCHAR(50) , LASTNAME VARCHAR(50) )"; expected "ARRAY, INVISIBLE, VISIBLE, NOT, NULL, AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, DEFAULT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+CREATE TABLE FORMATEUR_TEST ( ID BIGINT IDENTITY PRIMARY KEY , USERNAME VARCHAR(50) NOT NULL , PASSWORD VARCHAR(50) NOT NULL , FIRSTNAME VARCHAR(50) , LASTNAME VARCHAR(50) ) [42001-210]
+2022-05-13 20:53:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Colonne "HIRINGDATE" non trouvée
+Column "HIRINGDATE" not found; SQL statement:
+INSERT INTO FORMATEUR_TEST(ID, USERNAME, FIRSTNAME, LASTNAME, PASSWORD, HIRINGDATE, VERSION, CREATED_AT, MODIFIED_AT) VALUES (1, 'sherlock.holmes', 'Sherlock', 'Holmes', '123ss12sh', '1983-08-18 00:01', 1, '1983-08-18 00:01', '1999-03-18 00:02' ) [42122-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:521)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	at org.h2.message.DbException.get(DbException.java:227)
+	at org.h2.message.DbException.get(DbException.java:203)
+	at org.h2.table.Table.getColumn(Table.java:754)
+	at org.h2.command.Parser.parseColumn(Parser.java:1247)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1232)
+	at org.h2.command.Parser.parseInsert(Parser.java:1633)
+	at org.h2.command.Parser.parsePrepared(Parser.java:797)
+	at org.h2.command.Parser.parse(Parser.java:674)
+	at org.h2.command.Parser.parse(Parser.java:644)
+	at org.h2.command.Parser.prepareCommand(Parser.java:551)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:615)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:553)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:254)
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:54)
+	at com.mc.gestionformation.dbContext.TestDBConfig.dataSource(TestDBConfig.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:486)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:118)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+2022-05-13 20:54:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La table "FORMATEUR" existe déjà
+Table "FORMATEUR" already exists; SQL statement:
+CREATE TABLE FORMATEUR ( ID BIGINT PRIMARY KEY , USERNAME VARCHAR2(50) NOT NULL , PASSWORD VARCHAR2(50) NOT NULL , FIRSTNAME VARCHAR2(50) , LASTNAME VARCHAR2(50) , HIRINGDATE TIMESTAMP , CREATED_AT TIMESTAMP NOT NULL , MODIFIED_AT TIMESTAMP NOT NULL , VERSION INT , UNIQUE(USERNAME) ) [42101-210]

@@ -4,34 +4,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mc.gestionformation.aspect.Loggable;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.service.IFormateurService;
 
-@Component("myFormateurController")
-@Primary
-// load definition bean Component( scope : singleton, class =  FormateurController.class
-//                                      id ="formateurController" , Primary = "true"
-//                                      lazy-init= false )
-// bean creation : new FormateurController(ctx.getBean("formateurService") )
-@Profile("dev")
+@Component
+@Loggable
 public class FormateurController {
-
+	
+	
 	private static Logger logger = LoggerFactory.getLogger(FormateurController.class);
 
 	private FormateurDTO formateurdto;
 	private IFormateurService formateurService;
 
-//	public FormateurController() {
-//		super();
-//		logger.info("[bean creation from FormateurController with no-arg constructor]");
-//
-//	}
-
-	public FormateurController(IFormateurService formateurService) {
+	@Autowired
+	public FormateurController(@Qualifier("formateurService") IFormateurService formateurService) {
 		super();
 		this.formateurService = formateurService;
 		logger.info("[bean creation from FormateurController with 1-arg constructor]");
@@ -50,7 +43,6 @@ public class FormateurController {
 	}
 
 	@Autowired
-	
 	public void setFormateurdto(@Qualifier("formateurDto1")FormateurDTO formateurdto) {
 		System.out.println("[ formateurdto in Controller ] : " + formateurdto);
 		this.formateurdto = formateurdto;

@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.model.Formateur;
@@ -18,6 +16,7 @@ import com.mc.gestionformation.model.Formateur;
 @Configuration
 @ComponentScan(basePackages = "com.mc")
 @Import(DataSourceCfg.class)
+@EnableAspectJAutoProxy(proxyTargetClass = true) // activation de la prise en charge des aspects par ASPECTJ
 public class AppConfig {
 
 	Logger logger = LoggerFactory.getLogger(AppConfig.class);
@@ -25,7 +24,7 @@ public class AppConfig {
 	@Autowired
 	DataSourceCfg dataSourceCfg;
 
-	@Bean(name = "formateurDto20")
+	@Bean(name = "formateurDto1")
 	FormateurDTO formateurDto2() {
 		FormateurDTO formateurDTO = new FormateurDTO();
 		formateurDTO.setFormateur(formateur1());

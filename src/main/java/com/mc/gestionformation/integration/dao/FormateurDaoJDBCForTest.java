@@ -10,8 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -19,12 +18,11 @@ import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.model.Formateur;
 
 @Repository
-public class FormateurDaoJDBC implements IFormateurDAO {
-	private static Logger logger = LoggerFactory.getLogger(FormateurDaoJDBC.class);
+@Profile("test")
+public class FormateurDaoJDBCForTest implements IFormateurDAO {
 
 	@Inject
 	DataSource dataSource;
-	
 
 	public Object save(Object o) {
 		return 1;
@@ -32,10 +30,9 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 
 	@Override
 	public FormateurDTO create(FormateurDTO dto) {
-		// logger.info("Executing Create on " + dto.toString());
 		try (Connection conn = dataSource.getConnection();) {
 
-			String sql = "INSERT INTO FORMATEUR (FIRST_NAME, LAST_NAME  ";
+			String sql = "INSERT INTO FORMATEUR_TEST (FIRST_NAME, LAST_NAME  ";
 			if (dto.getFormateur().getId() != null) {
 				sql += " , ID ) VALUES (?,?,?)";
 			} else {
@@ -52,13 +49,11 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 			dto.setHasErros(true);
 			dto.getErreurs().add(sqlException);
 			sqlException.printStackTrace();
-			// logger.error("Exception in Create Method on " + dto.toString());
 		} catch (Exception exception) {
 			dto.setHasErros(true);
 			dto.getErreurs().add(exception);
-			// logger.error("Exception in Create Method on " + dto.toString());
 		}
-		// logger.info("finishing Create Method on " + dto.toString());
+
 		return dto;
 	}
 
@@ -68,7 +63,7 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 		try (Connection conn = dataSource.getConnection();) {
 
 			PreparedStatement pst = conn
-					.prepareStatement("UPDATE FORMATEUR SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ?");
+					.prepareStatement("UPDATE FORMATEUR_TEST SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ?");
 			pst.setString(1, dto.getFormateur().getPrenom());
 			pst.setString(2, dto.getFormateur().getNom());
 
@@ -93,7 +88,7 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 	public FormateurDTO delete(FormateurDTO dto) {
 		try (Connection conn = dataSource.getConnection();) {
 
-			PreparedStatement pst = conn.prepareStatement("DELETE FROM FORMATEUR  WHERE ID = ? ");
+			PreparedStatement pst = conn.prepareStatement("DELETE FROM FORMATEUR_TEST  WHERE ID = ? ");
 			pst.setLong(1, dto.getFormateur().getId());
 
 			pst.executeUpdate();
@@ -121,7 +116,7 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 		FormateurDTO dto = new FormateurDTO();
 		try (Connection conn = dataSource.getConnection();) {
 
-			PreparedStatement pst = conn.prepareStatement("SELECT * FROM FORMATEUR");
+			PreparedStatement pst = conn.prepareStatement("SELECT * FROM FORMATEUR_TEST");
 			ResultSet rs = pst.executeQuery();
 			List<Formateur> formateursResultatRecherche = new ArrayList<>();
 
@@ -155,18 +150,17 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	@Override
 	public FormateurDTO findById(Long id) {
-		ResultSet rs = null;
-		PreparedStatement pst = null;
+
 		FormateurDTO dto = new FormateurDTO();
 		try (Connection conn = dataSource.getConnection();) {
 
-			pst = conn.prepareStatement("SELECT * FROM FORMATEUR WHERE ID = ?");
-			pst.setLong(1, 1L);
-			rs = pst.executeQuery();
+			PreparedStatement pst = conn.prepareStatement("SELECT * FROM FORMATEUR_TEST WHERE ID = ?");
+			pst.setLong(1, id);
+			ResultSet rs = pst.executeQuery();
+		
 
 			while (rs.next()) {
 				Long ID = rs.getLong("ID");
@@ -178,9 +172,11 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 				formateur.setPrenom(firstName);
 				dto.setFormateur(formateur);
 				break;
-
+				
 			}
 
+		
+			
 		} catch (SQLException sqlException) {
 			dto.setHasErros(true);
 			dto.getErreurs().add(sqlException);
@@ -188,14 +184,6 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 		} catch (Exception exception) {
 			dto.setHasErros(true);
 			dto.getErreurs().add(exception);
-		} finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 
 		return dto;

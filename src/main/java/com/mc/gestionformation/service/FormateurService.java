@@ -2,26 +2,23 @@ package com.mc.gestionformation.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mc.gestionformation.controller.FormateurController;
+import com.mc.gestionformation.aspect.Loggable;
 import com.mc.gestionformation.dto.FormateurDTO;
-import com.mc.gestionformation.model.Formateur;
+
 @Service
-//@Primary
-/// la couche service sert pour le controle et la validation des DTO et l'application d'aspects techniques
-// pattern façade 
 public class FormateurService implements IFormateurService {
 	private static Logger logger = LoggerFactory.getLogger(FormateurService.class);
-	IFormateurService formateurBusiness;  // = new FormateurBusiness(); pour diminuer le couplage on éliminie l'instanciation 
-	
-	
+	IFormateurService formateurBusiness; // = new FormateurBusiness(); pour diminuer le couplage on éliminie
+											// l'instanciation
+
 	public FormateurService() {
 		logger.info("[bean creation from FormateurService with 0-arg constructor]");
 	}
 
-	
+	@Autowired
 	public FormateurService(IFormateurService formateurBusiness) {
 		super();
 		this.formateurBusiness = formateurBusiness;
@@ -29,10 +26,12 @@ public class FormateurService implements IFormateurService {
 	}
 
 	@Override
+	@Loggable
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
 		try {
-			System.out.println("  IN SERIVICE ...");
-			// ajout de l'aspet transaction
+			// journalisation
+            //			logger.info("  IN SERIVICE ..."); // --> remplacer par la journalisation en AOP
+			// ajout de l'aspet caching
 			cache();
 			// ajout de l'aspet transaction
 			ouvrirTransaction();
@@ -45,17 +44,19 @@ public class FormateurService implements IFormateurService {
 			journalisation(e);
 			throw e;
 		}
+
 		return formateurDto;
 	}
 
 	private void journalisation(Exception e) {
-		
+
 		System.out.println("je fais la jounalisation ");
 	}
 
 	private void cache() {
+		// utilisation de REDIS, HASHMAP, ...
 		System.out.println(" caching  ...");
-		
+
 	}
 
 	private boolean estAutorise() {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<aop:aspectj-autoproxy proxy-target-class="false"></aop:aspectj-autoproxy>
+
+
+	<bean id="loggingAspect"
+		class="com.mc.gestionformation.aspect.LoggingInterceptor"></bean>
+
+	<aop:config>
+		<aop:pointcut
+			expression="execution ( * com.mc.gestionformation.controller..*(*) )"
+			id="ControllerLayer" />
+		<aop:pointcut
+			expression="execution ( * com.mc.gestionformation.business..*(*) )"
+			id="BusinessLayer" />
+		<aop:pointcut
+			expression="execution ( * com.mc.gestionformation.service..*(*) )"
+			id="ServiceLayer" />
+
+		<aop:aspect id="loggerAspect" ref="loggerAspect">
+			<aop:before method="businessLayerEnregistrer"
+				pointcut-ref="BusinessLayer" />
+		</aop:aspect>
+
+	</aop:config>
+
+</beans>

@@ -10,16 +10,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.mc.gestionformation.config.InitConfig;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.FormateurDaoJDBC;
 import com.mc.gestionformation.model.Formateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = InitConfig.class)
+//@ContextConfiguration(classes = AppConfig.class)
+@ContextConfiguration(locations = {"classpath:spring/all-config.xml"}) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FormateurDaoJDBCTestCase {
 
@@ -87,3 +89,5 @@ public class FormateurDaoJDBCTestCase {
 	}
 
 }
+
+

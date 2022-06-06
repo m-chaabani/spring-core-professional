@@ -14,7 +14,7 @@ public class Formation extends AbstractEntity {
 	private Duration duree;
 	private Discipline discipline;
 
-	private Set<Formation> formations = new HashSet<Formation>();
+	
 
 	public Formation() {
 		// TODO Auto-generated constructor stub
@@ -73,12 +73,13 @@ public class Formation extends AbstractEntity {
 		this.discipline = discipline;
 	}
 
-	public Set<Formation> getFormations() {
-		return formations;
+	@Override
+	public String toString() {
+		return "Formation [code=" + code + ", titre=" + titre + ", description=" + description + ", preprequis="
+				+ preprequis + ", duree=" + duree + ", discipline=" + discipline + "]";
 	}
+	
+	
 
-	public void setFormations(Set<Formation> formations) {
-		this.formations = formations;
-	}
 
 }

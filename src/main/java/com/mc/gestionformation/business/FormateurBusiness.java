@@ -5,22 +5,21 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.mc.gestionformation.controller.FormateurController;
 import com.mc.gestionformation.dto.FormateurDTO;
-import com.mc.gestionformation.integration.dao.IFormateurDao;
+import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.IFormateurService;
 
 @Service("formateurBusiness")
 public class FormateurBusiness implements IFormateurService {
-	private static Logger logger = LoggerFactory.getLogger(FormateurController.class);
-	IFormateurDao formateurDao = null;
+	private static Logger logger = LoggerFactory.getLogger(FormateurBusiness.class);
+	IFormateurDAO formateurDao = null;
 
-  @Autowired
-	public FormateurBusiness(IFormateurDao formateurDao) {
+	@Autowired
+	public FormateurBusiness(IFormateurDAO formateurDao) {
 		super();
 		this.formateurDao = formateurDao;
 		logger.info("[bean creation from FormateurBusiness with 1-arg constructor]");
@@ -28,12 +27,22 @@ public class FormateurBusiness implements IFormateurService {
 
 	@Override
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
-		System.out.println("  IN BUSINESS ...");
-		System.out.println(" Enregisterment de l'objet Formateur");
+
 		Formateur formateur = formateurDto.getFormateur();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
 		formateurDto = (FormateurDTO) formateurDao.create(formateurDto);
+		logger.info(" in business " + formateurDto.getFormateur().getNom());
+
+		return formateurDto;
+	}
+
+	public FormateurDTO findById(FormateurDTO formateurDto) {
+		Formateur formateur = formateurDto.getFormateur();
+		formateurDto = (FormateurDTO) formateurDao.findById(formateur.getId());
+		formateur = formateurDto.getFormateur();
+		formateur.setCreatedAt(LocalDate.now());
+		formateur.setModifiedAt(LocalDate.now());
 		return formateurDto;
 	}
 
