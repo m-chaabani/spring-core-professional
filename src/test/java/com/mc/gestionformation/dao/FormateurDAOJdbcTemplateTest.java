@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.mc.gestionformation.config.JdbcConfigTest;
 import com.mc.gestionformation.dto.FormateurDTO;
-import com.mc.gestionformation.integration.dao.FormateurDAOJdbcTemplate;
+import com.mc.gestionformation.integration.dao.jdbctemplate.FormateurDAOJdbcTemplate;
 import com.mc.gestionformation.model.Formateur;
 
 @SpringJUnitConfig(classes = { JdbcConfigTest.class })

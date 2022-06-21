@@ -1,4 +1,4 @@
-package com.mc.gestionformation.integration.dao;
+package com.mc.gestionformation.integration.dao.jdbctemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,22 +7,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.mc.gestionformation.dto.FormateurDTO;
+import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.model.Formation;
 
 @Repository
 public class FormateurDAOJdbcTemplate implements IFormateurDAO {
+
+	private static Logger logger = LoggerFactory.getLogger(FormateurDAOJdbcTemplate.class);
 
 	private static final String TABLE_NAME_FORMATEUR = "FORMATEUR_TEST";
 	private static final String TABLE_NAME_FORMATION = "FORMATION_TEST";
@@ -51,11 +59,16 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 	public FormateurDTO create(FormateurDTO dto) {
 		Formateur formateur = dto.getFormateur();
 		String sql = "INSERT INTO " + TABLE_NAME_FORMATEUR + " (ID, FIRST_NAME, LAST_NAME) values (?,?,?)";
+		jdbcTempate.update(sql, formateur.getId(), formateur.getPrenom(), formateur.getNom());
+
 		try {
-			jdbcTempate.update(sql, formateur.getId(), formateur.getPrenom(), formateur.getNom());
+
 		} catch (DataAccessException e) {
 			dto.setHasErros(true);
 			dto.getErreurs().add(e);
+			if (e instanceof DuplicateKeyException)
+				logger.error("Une clé unique est violé!");
+
 			throw e;
 
 		}

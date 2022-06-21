@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
@@ -26,8 +28,9 @@ public class FormateurBusiness implements IFormateurService {
 	}
 
 	@Override
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
-
+		formateurDto = this.findById(formateurDto);
 		Formateur formateur = formateurDto.getFormateur();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
@@ -37,6 +40,7 @@ public class FormateurBusiness implements IFormateurService {
 		return formateurDto;
 	}
 
+	@Transactional(readOnly = true, propagation = Propagation.NEVER)
 	public FormateurDTO findById(FormateurDTO formateurDto) {
 		Formateur formateur = formateurDto.getFormateur();
 		formateurDto = (FormateurDTO) formateurDao.findById(formateur.getId());

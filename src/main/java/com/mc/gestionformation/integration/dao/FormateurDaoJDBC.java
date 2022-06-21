@@ -32,6 +32,7 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 
 	@Override
 	public FormateurDTO create(FormateurDTO dto) {
+		
 		// logger.info("Executing Create on " + dto.toString());
 		try (Connection conn = dataSource.getConnection();) {
 
@@ -52,6 +53,10 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 			dto.setHasErros(true);
 			dto.getErreurs().add(sqlException);
 			sqlException.printStackTrace();
+		
+			
+			// translation
+			//throw new E(); ORA-00001 : Primary Key Violation
 			// logger.error("Exception in Create Method on " + dto.toString());
 		} catch (Exception exception) {
 			dto.setHasErros(true);

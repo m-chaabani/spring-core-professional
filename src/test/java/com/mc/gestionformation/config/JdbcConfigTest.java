@@ -11,7 +11,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import com.mc.gestionformation.integration.dao.FormateurDAOJdbcTemplate;
+import com.mc.gestionformation.integration.dao.jdbctemplate.FormateurDAOJdbcTemplate;
 
 @Configuration
 @ComponentScan(basePackageClasses = FormateurDAOJdbcTemplate.class )
