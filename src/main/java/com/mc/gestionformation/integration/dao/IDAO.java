@@ -1,19 +1,22 @@
 package com.mc.gestionformation.integration.dao;
 
-import com.mc.gestionformation.dto.AbstractDTO;
+import java.util.Collection;
+import java.util.Optional;
 
-public interface IDAO<T extends AbstractDTO> {
+import com.mc.gestionformation.model.AbstractEntity;
 
-	T create(T dto);
+public interface IDAO<T extends AbstractEntity> {
 
-	T update(T dto);
+	T create(T entity);
 
-	T delete(T dto);
+	T update(T entity);
 
-	T deleteById(Long id);
+	boolean delete(T entity);
 
-	T findById(Long id);
+	boolean deleteById(Long id);
 
-	T findAll();
+	Optional<T> findById(Long id);
+
+	Collection<T> findAll();
 
 }

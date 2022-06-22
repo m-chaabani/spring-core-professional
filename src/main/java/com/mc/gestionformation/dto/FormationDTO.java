@@ -7,7 +7,7 @@ import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.model.Formation;
 import com.mc.gestionformation.model.Support;
 
-public class FormationDTO extends AbstractDTO {
+public class FormationDTO extends AbstractDTO<Formation> {
 
 	private Formation formation;
 	private Formateur formateur;

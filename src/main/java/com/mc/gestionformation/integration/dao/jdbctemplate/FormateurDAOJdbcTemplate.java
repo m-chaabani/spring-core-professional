@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +19,7 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
@@ -56,57 +55,43 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 	NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	@Override
-	public FormateurDTO create(FormateurDTO dto) {
-		Formateur formateur = dto.getFormateur();
+	public Formateur create(Formateur formateur) {
+
 		String sql = "INSERT INTO " + TABLE_NAME_FORMATEUR + " (ID, FIRST_NAME, LAST_NAME) values (?,?,?)";
-		jdbcTempate.update(sql, formateur.getId(), formateur.getPrenom(), formateur.getNom());
-
-		try {
-
-		} catch (DataAccessException e) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(e);
-			if (e instanceof DuplicateKeyException)
-				logger.error("Une clé unique est violé!");
-
-			throw e;
-
-		}
-
-		return dto;
+		int impactedRows = jdbcTempate.update(sql, formateur.getId(), formateur.getPrenom(), formateur.getNom());
+		return (impactedRows==0)?null:formateur;
 	}
 
 	@Override
-	public FormateurDTO update(FormateurDTO dto) {
-		Formateur formateur = dto.getFormateur();
+	public Formateur update(Formateur formateur) {
 		String sql = "UPDATE " + TABLE_NAME_FORMATEUR + " SET FIRST_NAME = ?, LAST_NAME= ? WHERE ID = ?";
-		jdbcTempate.update(sql, formateur.getPrenom(), formateur.getNom(), formateur.getId());
+		int impactedRows =jdbcTempate.update(sql, formateur.getPrenom(), formateur.getNom(), formateur.getId());
 
-		return dto;
+		return (impactedRows==0)?null:formateur;
 	}
 
 	@Override
-	public FormateurDTO delete(FormateurDTO dto) {
+	public boolean delete(Formateur formateur) {
 
-		Formateur formateur = dto.getFormateur();
 		String sql = "DELETE " + TABLE_NAME_FORMATEUR + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", formateur.getId());
-		namedJdbcTemplate.update(sql, /* params */ Map.of("id", formateur.getId()));
-		return dto;
+		int impactedRows = namedJdbcTemplate.update(sql, /* params */ Map.of("id", formateur.getId()));
+		return !(impactedRows==0);
 
 	}
 
 	@Override
-	public FormateurDTO deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean deleteById(Long id) {
+		String sql = "DELETE " + TABLE_NAME_FORMATEUR + " WHERE ID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		int impactedRows = namedJdbcTemplate.update(sql, /* params */ Map.of("id", id));
+		return !(impactedRows==0);
 	}
 
 	@Override
-	public FormateurDTO findById(Long id) {
-
-		FormateurDTO formateurDTO = new FormateurDTO();
+	public Optional<Formateur> findById(Long id) {
 
 		String sql = " SELECT * FROM " + TABLE_NAME_FORMATEUR + " WHERE ID = ?";
 
@@ -118,20 +103,14 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 //			return formateur;
 //
 //		};
-
 		Formateur formateur = this.jdbcTempate.queryForObject(sql, new FormateurMapper(), id);
-
-		formateurDTO.setFormateur(formateur);
-
-		return formateurDTO;
+		return Optional.ofNullable(formateur);
 	}
 
 	@Override
-	public FormateurDTO findAll() {
+	public List<Formateur> findAll() {
 
-		FormateurDTO formateurDTO = new FormateurDTO();
 		List<Formateur> formateurs = new ArrayList<>();
-		formateurDTO.setFormateurs(formateurs);
 		String sql = " SELECT * FROM " + TABLE_NAME_FORMATEUR;
 		List<Map<String, Object>> result = this.jdbcTempate.queryForList(sql);
 
@@ -145,23 +124,18 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 
 		}
 
-		return formateurDTO;
+		return formateurs;
 	}
 
-	public FormateurDTO findAll2() {
-
-		FormateurDTO formateurDTO = new FormateurDTO();
+	public List<Formateur> findAll2() {
 
 		String sql = " SELECT * FROM " + TABLE_NAME_FORMATEUR;
 		List<Formateur> formateurs = this.jdbcTempate.query(sql, new FormateurMapper());
-		formateurDTO.setFormateurs(formateurs);
-
-		return formateurDTO;
+		return formateurs;
 	}
 
 	@Override
-	public FormateurDTO findByDiscipline(FormateurDTO dto) {
-		// TODO Auto-generated method stub
+	public FormateurDTO findByDiscipline(FormateurDTO formateurDto) {
 		return null;
 	}
 
@@ -239,7 +213,7 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 					formations.add(formation);
 
 				}
-				dto.setFormateur(formateur);
+				dto.setEntity(formateur);
 				dto.setFormations(formations);
 
 				return dto;

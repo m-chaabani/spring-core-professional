@@ -1,4 +1,4 @@
-package com.mc.gestionformation.dao;
+package com.mc.gestionformation.business;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -43,7 +43,7 @@ public class FormateurBusinessjMockTest {
 		searchedFormateur.setId(FORMATEUR_ID);
 		searchedFormateur.setNom("MOHAMED");
 		searchedFormateur.setPrenom("BEN SALAH");
-		formateurDTO.setFormateur(searchedFormateur);
+		formateurDTO.setEntity(searchedFormateur);
 
 		mockery.checking(new Expectations() {
 			{
@@ -57,8 +57,8 @@ public class FormateurBusinessjMockTest {
 		mockery.assertIsSatisfied(); // (7)
 
 		assertNotNull(formateurDTOResult); // (8.1)
-		assertNotNull(formateurDTOResult.getFormateur());// (8.2)
-		assertEquals("Name are not the same ! ", formateurDTO.getFormateur().getNom(), "MOHAMED");// (8.2)
+		assertNotNull(formateurDTOResult.getEntity());// (8.2)
+		assertEquals("Name are not the same ! ", formateurDTO.getEntity().getNom(), "MOHAMED");// (8.2)
 
 	}
 

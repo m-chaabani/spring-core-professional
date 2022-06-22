@@ -28,23 +28,24 @@ public class FormateurBusiness implements IFormateurService {
 	}
 
 	@Override
-	//@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
+		
 		formateurDto = this.findById(formateurDto);
-		Formateur formateur = formateurDto.getFormateur();
+		Formateur formateur = formateurDto.getEntity();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
-		formateurDto = (FormateurDTO) formateurDao.create(formateurDto);
-		logger.info(" in business " + formateurDto.getFormateur().getNom());
+		formateur = formateurDao.create(formateur);
+		logger.info(" in business " + formateurDto.getEntity().getNom());
 
 		return formateurDto;
 	}
 
-	@Transactional(readOnly = true, propagation = Propagation.NEVER)
+	@Transactional(readOnly = true)
 	public FormateurDTO findById(FormateurDTO formateurDto) {
-		Formateur formateur = formateurDto.getFormateur();
-		formateurDto = (FormateurDTO) formateurDao.findById(formateur.getId());
-		formateur = formateurDto.getFormateur();
+		Formateur formateur = formateurDto.getEntity();
+		formateurDao.findById(formateur.getId());
+		formateur = formateurDto.getEntity();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
 		return formateurDto;

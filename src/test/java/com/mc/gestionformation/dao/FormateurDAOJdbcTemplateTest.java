@@ -3,11 +3,11 @@ package com.mc.gestionformation.dao;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,7 @@ public class FormateurDAOJdbcTemplateTest {
 	@Test
 	public void FormateurDaoJdbcTemplate_1_FindAll_PositiveTest() {
 
-		FormateurDTO dto = daoJdbcTemplate.findAll();
-		assertNotNull(dto);
-		List<Formateur> listFormateurs = dto.getFormateurs();
+		List<Formateur> listFormateurs = daoJdbcTemplate.findAll();
 		assertNotNull(listFormateurs);
 		assertEquals(listFormateurs.size(), 4);
 
@@ -48,12 +46,10 @@ public class FormateurDAOJdbcTemplateTest {
 	@Test
 	public void FormateurDaoJdbcTemplate_3_FindByID_PositiveTest() {
 
-		FormateurDTO dto = daoJdbcTemplate.findById(SEARCHED_FORMATEUR_ID);
-		assertNotNull(dto);
-		Formateur formateur = dto.getFormateur();
-		assertNotNull(formateur);
-		assertEquals(formateur.getPrenom(), "MOHAMED");
-		assertEquals(formateur.getNom(), "BEN SALAH");
+		Optional<Formateur> formateur  = daoJdbcTemplate.findById(SEARCHED_FORMATEUR_ID);
+		assertNotNull(formateur.get());
+		assertEquals(formateur.get().getPrenom(), "MOHAMED");
+		assertEquals(formateur.get().getNom(), "BEN SALAH");
 
 	}
 
@@ -76,12 +72,7 @@ public class FormateurDAOJdbcTemplateTest {
 		formateur.setNom("Test Create (NOM) ");
 		formateur.setPrenom("Test Create (PRENOM) ");
 
-		FormateurDTO dto = new FormateurDTO();
-		dto.setFormateur(formateur);
-
-		dto = daoJdbcTemplate.create(dto); // + Commit;
-		assertNotNull(dto);
-		assertFalse(dto.isHasErros());
+		formateur = daoJdbcTemplate.create(formateur); // + Commit;
 		assertEquals(daoJdbcTemplate.count(), 5L);
 
 	}

@@ -6,20 +6,10 @@ import com.mc.gestionformation.model.Discipline;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.model.Formation;
 
-public class FormateurDTO extends AbstractDTO {
+public class FormateurDTO extends AbstractDTO<Formateur> {
 
-	private Formateur formateur;
 	private Discipline discipline;
-	private List<Formateur> formateurs;
 	private List<Formation> formations;
-
-	public Formateur getFormateur() {
-		return formateur;
-	}
-
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
-	}
 
 	public List<Formation> getFormations() {
 		return formations;
@@ -27,14 +17,6 @@ public class FormateurDTO extends AbstractDTO {
 
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
-	}
-
-	public List<Formateur> getFormateurs() {
-		return formateurs;
-	}
-
-	public void setFormateurs(List<Formateur> formateurs) {
-		this.formateurs = formateurs;
 	}
 
 	public Discipline getDiscipline() {
@@ -47,13 +29,7 @@ public class FormateurDTO extends AbstractDTO {
 
 	@Override
 	public String toString() {
-		return "FormateurDTO [formateur=" + formateur + ", formations=" + formations + "]";
+		return "FormateurDTO [formateur=" + getListEntity() + ", formations=" + formations + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }

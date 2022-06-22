@@ -3,16 +3,15 @@ package com.mc.gestionformation.integration.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.mc.gestionformation.dto.FormateurDTO;
@@ -24,111 +23,98 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 
 	@Inject
 	DataSource dataSource;
-	
 
-	public Object save(Object o) {
-		return 1;
-	}
+	private static String TABLE_NAME = "FORMATEUR_TEST";
 
 	@Override
-	public FormateurDTO create(FormateurDTO dto) {
-		
-		// logger.info("Executing Create on " + dto.toString());
+	public Formateur create(Formateur formateur) {
+
 		try (Connection conn = dataSource.getConnection();) {
 
-			String sql = "INSERT INTO FORMATEUR (FIRST_NAME, LAST_NAME  ";
-			if (dto.getFormateur().getId() != null) {
+			String sql = "INSERT INTO " + TABLE_NAME + " (FIRST_NAME, LAST_NAME  ";
+			if (formateur.getId() != null) {
 				sql += " , ID ) VALUES (?,?,?)";
 			} else {
 				sql += " ) VALUES (?,?)";
 			}
 
 			PreparedStatement pst = conn.prepareStatement(sql);
-			pst.setLong(3, dto.getFormateur().getId());
-			pst.setString(1, dto.getFormateur().getPrenom());
-			pst.setString(2, dto.getFormateur().getNom());
+			pst.setLong(3, formateur.getId());
+			pst.setString(1, formateur.getPrenom());
+			pst.setString(2, formateur.getNom());
 			pst.executeUpdate();
 
-		} catch (SQLException sqlException) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(sqlException);
-			sqlException.printStackTrace();
-		
-			
-			// translation
-			//throw new E(); ORA-00001 : Primary Key Violation
-			// logger.error("Exception in Create Method on " + dto.toString());
 		} catch (Exception exception) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(exception);
-			// logger.error("Exception in Create Method on " + dto.toString());
+			throw new RuntimeException(exception.getMessage());
 		}
-		// logger.info("finishing Create Method on " + dto.toString());
-		return dto;
+
+		return formateur;
 	}
 
 	@Override
-
-	public FormateurDTO update(FormateurDTO dto) {
+	public Formateur update(Formateur formateur) {
+		int impactedRows = 0;
 		try (Connection conn = dataSource.getConnection();) {
 
 			PreparedStatement pst = conn
-					.prepareStatement("UPDATE FORMATEUR SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ?");
-			pst.setString(1, dto.getFormateur().getPrenom());
-			pst.setString(2, dto.getFormateur().getNom());
+					.prepareStatement("UPDATE " + TABLE_NAME + " SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ?");
+			pst.setString(1, formateur.getPrenom());
+			pst.setString(2, formateur.getNom());
 
-			pst.setLong(3, dto.getFormateur().getId());
+			pst.setLong(3, formateur.getId());
 
-			pst.executeUpdate();
+			impactedRows = pst.executeUpdate();
 
-		} catch (SQLException sqlException) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(sqlException);
-			sqlException.printStackTrace();
 		} catch (Exception exception) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(exception);
+			new RuntimeException(exception);
 		}
 
-		return dto;
+		return formateur;
 	}
 
 	@Override
-
-	public FormateurDTO delete(FormateurDTO dto) {
+	public boolean delete(Formateur formateur) {
+		int impactedRows = 0;
 		try (Connection conn = dataSource.getConnection();) {
 
-			PreparedStatement pst = conn.prepareStatement("DELETE FROM FORMATEUR  WHERE ID = ? ");
-			pst.setLong(1, dto.getFormateur().getId());
+			PreparedStatement pst = conn.prepareStatement("DELETE FROM " + TABLE_NAME + "   WHERE ID = ? ");
+			pst.setLong(1, formateur.getId());
 
-			pst.executeUpdate();
+			impactedRows = pst.executeUpdate();
 
-		} catch (SQLException sqlException) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(sqlException);
-			sqlException.printStackTrace();
 		} catch (Exception exception) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(exception);
+			new RuntimeException(exception);
 		}
 
-		return dto;
-
-	}
-
-	public FormateurDTO findById(FormateurDTO dto) {
-		return dto;
+		return !(impactedRows == 0);
 
 	}
 
 	@Override
-	public FormateurDTO findAll() {
-		FormateurDTO dto = new FormateurDTO();
+	public boolean deleteById(Long id) {
+		int impactedRows = 0;
 		try (Connection conn = dataSource.getConnection();) {
 
-			PreparedStatement pst = conn.prepareStatement("SELECT * FROM FORMATEUR");
+			PreparedStatement pst = conn.prepareStatement("DELETE FROM " + TABLE_NAME + "   WHERE ID = ? ");
+			pst.setLong(1, id);
+
+			impactedRows = pst.executeUpdate();
+
+		} catch (Exception exception) {
+			new RuntimeException(exception);
+		}
+
+		return !(impactedRows == 0);
+	}
+
+	@Override
+	public List<Formateur> findAll() {
+		List<Formateur> formateursResultatRecherche = new ArrayList<>();
+
+		try (Connection conn = dataSource.getConnection();) {
+
+			PreparedStatement pst = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
 			ResultSet rs = pst.executeQuery();
-			List<Formateur> formateursResultatRecherche = new ArrayList<>();
 
 			while (rs.next()) {
 				Long id = rs.getLong("ID");
@@ -142,68 +128,40 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 				formateursResultatRecherche.add(formateur);
 			}
 
-			dto.setFormateurs(formateursResultatRecherche);
-		} catch (SQLException sqlException) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(sqlException);
-			sqlException.printStackTrace();
 		} catch (Exception exception) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(exception);
+			new RuntimeException(exception);
 		}
 
-		return dto;
+		return formateursResultatRecherche;
 	}
 
 	@Override
-	public FormateurDTO deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	public Optional<Formateur> findById(Long id) {
 
-	@Override
-	public FormateurDTO findById(Long id) {
-		ResultSet rs = null;
-		PreparedStatement pst = null;
-		FormateurDTO dto = new FormateurDTO();
+		Formateur formateur = new Formateur();
 		try (Connection conn = dataSource.getConnection();) {
 
-			pst = conn.prepareStatement("SELECT * FROM FORMATEUR WHERE ID = ?");
-			pst.setLong(1, 1L);
-			rs = pst.executeQuery();
+			PreparedStatement pst = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + "  WHERE ID = ?");
+			pst.setLong(1, id);
+			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
 				Long ID = rs.getLong("ID");
 				String firstName = rs.getString("FIRST_NAME");
 				String LastName = rs.getString("LAST_NAME");
-				Formateur formateur = new Formateur();
+
 				formateur.setId(ID);
 				formateur.setNom(LastName);
 				formateur.setPrenom(firstName);
-				dto.setFormateur(formateur);
 				break;
 
 			}
 
-		} catch (SQLException sqlException) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(sqlException);
-			sqlException.printStackTrace();
 		} catch (Exception exception) {
-			dto.setHasErros(true);
-			dto.getErreurs().add(exception);
-		} finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			new RuntimeException(exception);
 		}
 
-		return dto;
+		return Optional.ofNullable(formateur);
 
 	}
 

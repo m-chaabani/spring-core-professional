@@ -35,7 +35,7 @@ public class FormateurController {
 		System.out.println(" Validation des données au niveau controller effectué ");
 
 		formateurdto = formateurService.enregistrer(formateurdto);
-		System.out.println(" Formateur enregistré avec success : " + formateurdto.getFormateur());
+		System.out.println(" Formateur enregistré avec success : " + formateurdto.getEntity());
 	}
 
 	public FormateurDTO getFormateurdto() {

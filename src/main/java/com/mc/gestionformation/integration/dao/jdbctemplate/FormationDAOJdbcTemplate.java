@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
@@ -52,44 +50,41 @@ public class FormationDAOJdbcTemplate implements IFormationDAO {
 	NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	@Override
-	public FormationDTO create(FormationDTO dto) {
-		Formation formation = dto.getFormation();
+	public Formation create(Formation formation) {
 		String sql = "INSERT INTO " + TABLE_NAME_FORMATION + " (ID, TITRE, CODE) values (?,?,?)";
-		jdbcTempate.update(sql, formation.getId(), formation.getTitre(), formation.getCode());
-		return dto;
+		int impactedRows = jdbcTempate.update(sql, formation.getId(), formation.getTitre(), formation.getCode());
+		return impactedRows!=0?formation:null;
 	}
 
 	@Override
-	public FormationDTO update(FormationDTO dto) {
-		Formation formation = dto.getFormation();
+	public Formation update(Formation formation) {
 		String sql = "UPDATE " + TABLE_NAME_FORMATION + " SET TITRE = ?, CODE= ? WHERE ID = ?";
-		jdbcTempate.update(sql, formation.getTitre(), formation.getCode(), formation.getId());
-
-		return dto;
+		int impactedRows =jdbcTempate.update(sql, formation.getTitre(), formation.getCode(), formation.getId());
+		return impactedRows!=0?formation:null;
 	}
 
 	@Override
-	public FormationDTO delete(FormationDTO dto) {
+	public boolean delete(Formation formation) {
 
-		Formation formation = dto.getFormation();
 		String sql = "DELETE " + TABLE_NAME_FORMATION + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", formation.getId());
-		namedJdbcTemplate.update(sql, /* params */ Map.of("id", formation.getId()));
-		return dto;
+		int impactedRows =  namedJdbcTemplate.update(sql, /* params */ Map.of("id", formation.getId()));
+		return !(impactedRows==0);
 
 	}
 
 	@Override
-	public FormationDTO deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean deleteById(Long id) {
+		String sql = "DELETE " + TABLE_NAME_FORMATION + " WHERE ID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		int impactedRows =  namedJdbcTemplate.update(sql, /* params */ Map.of("id", id));
+		return !(impactedRows==0);
 	}
 
 	@Override
-	public FormationDTO findById(Long id) {
-
-		FormationDTO formationDTO = new FormationDTO();
+	public Optional<Formation> findById(Long id) {
 
 		String sql = " SELECT * FROM " + TABLE_NAME_FORMATION + " WHERE ID = ?";
 
@@ -103,16 +98,13 @@ public class FormationDAOJdbcTemplate implements IFormationDAO {
 //		};
 
 		Formation formation = this.jdbcTempate.queryForObject(sql, new FormationMapper(), id);
-
-		formationDTO.setFormation(formation);
-
-		return formationDTO;
+		return Optional.ofNullable(formation);
 	}
 
 	@Override
-	public FormationDTO findAll() {
+	public List<Formation> findAll() {
 
-		FormationDTO formationDTO = new FormationDTO();
+	
 		List<Formation> formations = new ArrayList<>();
 		String sql = " SELECT * FROM " + TABLE_NAME_FORMATION;
 		List<Map<String, Object>> result = this.jdbcTempate.queryForList(sql);
@@ -127,7 +119,7 @@ public class FormationDAOJdbcTemplate implements IFormationDAO {
 
 		}
 
-		return formationDTO;
+		return formations;
 	}
 
 	public long count() {

@@ -7,13 +7,13 @@ public class FormateurDTOMapperImpl implements FormateurDTOMapper {
 	@Override
 	public FormateurDTO formateurToDTO(Formateur formateur) {
 		FormateurDTO formateurDto = new FormateurDTO();
-		formateurDto.setFormateur(formateur);
+		formateurDto.setEntity(formateur);
 		return formateurDto;
 	}
 
 	@Override
 	public Formateur DTOToformateur(FormateurDTO formateurDto) {
-		Formateur formateur = formateurDto.getFormateur();
+		Formateur formateur = formateurDto.getEntity();
 		return formateur;
 	}
 

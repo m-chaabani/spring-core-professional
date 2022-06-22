@@ -2,9 +2,13 @@ package com.mc.gestionformation.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class AbstractEntity {
 
-
+	@Id
 	protected Long id;
 	protected String version;
 	protected LocalDate createdAt;
@@ -21,8 +25,6 @@ public abstract class AbstractEntity {
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
 	}
-
-
 
 	public Long getId() {
 		return id;

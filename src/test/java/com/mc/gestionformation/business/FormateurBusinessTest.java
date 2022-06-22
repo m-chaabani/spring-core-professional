@@ -13,7 +13,7 @@ import org.junit.runners.MethodSorters;
 import org.springframework.core.annotation.Order;
 
 import com.mc.gestionformation.dto.FormateurDTO;
-import com.mc.gestionformation.integration.dao.FormateurDaoInMemory;
+import com.mc.gestionformation.integration.dao.inmem.FormateurDaoInMemory;
 import com.mc.gestionformation.model.Formateur;
 
 
@@ -36,11 +36,11 @@ public class FormateurBusinessTest {
 		Formateur formateur = new Formateur();
 		formateur.setNom("Test");
 		formateur.setPrenom("Test");
-		formateurDto.setFormateur(formateur);
+		formateurDto.setEntity(formateur);
 
 		FormateurDTO formateurDtoResult = formateurBusines.enregistrer(formateurDto);
 		assertNotNull(formateurDtoResult);
-		assertNotNull(formateur = formateurDtoResult.getFormateur());
+		assertNotNull(formateur = formateurDtoResult.getEntity());
 	     long id = (long)formateur.getId();
 		assertEquals(6, id);
 

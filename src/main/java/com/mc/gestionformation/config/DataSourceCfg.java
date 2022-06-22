@@ -1,19 +1,25 @@
 package com.mc.gestionformation.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 
 @Configuration
-@PropertySource("classpath:db/db.properties")
+@PropertySources({ @PropertySource("classpath:db/db.properties"),
+		@PropertySource("classpath:db/hibernate.properties") })
+
 public class DataSourceCfg {
 
 	@Value("${db.driverClassName}")
@@ -27,6 +33,13 @@ public class DataSourceCfg {
 
 	@Value("${db.password}")
 	private String password;
+
+	// hibernate properties
+	@Value("${hibernate.show_sql}")
+	private String show_sql;
+
+	@Value("${db.url}")
+	private String format_sql;
 
 	@Bean
 	static PropertySourcesPlaceholderConfigurer propertySourcePlaceHolder() {
@@ -62,13 +75,30 @@ public class DataSourceCfg {
 //	}
 
 	@Bean
-	@Profile("test")
 	DataSource datasourceTest() {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		DataSource ds = builder.setType(EmbeddedDatabaseType.H2).addScript("classpath:db/schema_test.sql")
 				.addScript("classpath:db/data-test.sql").build();
 		return ds;
 
+	}
+
+	@Bean
+	SessionFactory sessionFactory() {
+		return new LocalSessionFactoryBuilder(datasourceTest())
+				.scanPackages("com.mc.gestionformation.model")
+				.addProperties(hibernateProps()).buildSessionFactory();
+	}
+
+	@Bean
+	Properties hibernateProps() {
+
+		Properties props = new Properties();
+		props.put("hibernate.show_sql", true);
+		props.put("hibernate.format_sql", true);
+		props.put("hibernate.hbm2ddl.auto", "create");
+		// props.put("hibernate.dialect", "H2_DIA);
+		return props;
 	}
 
 	@Override

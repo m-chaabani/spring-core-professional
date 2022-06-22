@@ -2,6 +2,9 @@ package com.mc.gestionformation.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,10 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.FormateurDaoJDBC;
@@ -21,7 +22,7 @@ import com.mc.gestionformation.model.Formateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes = AppConfig.class)
-@ContextConfiguration(locations = {"classpath:spring/all-config.xml"}) 
+@ContextConfiguration(locations = { "classpath:spring/all-config.xml" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FormateurDaoJDBCTestCase {
 
@@ -44,50 +45,43 @@ public class FormateurDaoJDBCTestCase {
 		System.out.println("tearDown");
 
 	}
-	
+
 	@Test
 	public void test0FindAllBeforeAll() {
 		test3Delete();
-		dto  = formateurDao.findAll(); 
-		assertFalse(dto.isHasErros());
-		nombreFormateur = dto.getFormateurs().size() ;
+		List formateurs = formateurDao.findAll();
+		nombreFormateur = formateurs.size();
 		System.out.println(" test0FindAllBeforeAll " + nombreFormateur);
 	}
 
 	@Test
 	public void test1Create() {
-		
+
 		Formateur formateur = new Formateur("test_fn", "test_ln");
 		formateur.setId(0L);
-		dto.setFormateur(formateur);
-		dto = formateurDao.create(dto);
+		formateur = formateurDao.create(formateur);
 		assertFalse(dto.isHasErros());
 	}
 
 	@Test
 	public void test2FindAllAfterCreation() {
-		dto  = formateurDao.findAll(); 
+		List formateurs = formateurDao.findAll();
 		assertFalse(dto.isHasErros());
-		assertEquals(dto.getFormateurs().size(),(nombreFormateur + 1));
-	
+		assertEquals(formateurs.size(), (nombreFormateur + 1));
+
 	}
 
 	@Test
 	public void test3Delete() {
 		Formateur formateur = new Formateur(0L);
-		dto.setFormateur(formateur);
-		dto = formateurDao.delete(dto);
-		assertFalse(dto.isHasErros());
-		
+		assertTrue(formateurDao.delete(formateur));
+
 	}
 
 	@Test
 	public void test4FindAllAfterDeletion() {
-		dto  = formateurDao.findAll(); 
-		assertFalse(dto.isHasErros());
-		assertEquals(dto.getFormateurs().size(), nombreFormateur );
+		List formateurs = formateurDao.findAll();
+		assertEquals(formateurs.size(), nombreFormateur);
 	}
 
 }
-
-

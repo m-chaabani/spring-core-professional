@@ -1,9 +1,10 @@
-package com.mc.gestionformation.integration.dao;
+package com.mc.gestionformation.integration.dao.inmem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.dto.FormateurDTOMapper;
 import com.mc.gestionformation.dto.FormateurDTOMapperImpl;
+import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Discipline;
 import com.mc.gestionformation.model.Formateur;
 
@@ -54,62 +56,55 @@ public class FormateurDaoInMemory implements IFormateurDAO {
 	}
 
 	@Override
-	public FormateurDTO create(FormateurDTO formateurDTO) {
+	public Formateur create(Formateur formateur) {
 
 		long nextIndice = FORMATEURS.size() + 1;
-		Formateur formateur = formateurMapper.DTOToformateur(formateurDTO);
 		formateur.setId((long) (nextIndice));
 		FORMATEURS.put(nextIndice, formateur);
-		return formateurMapper.formateurToDTO(formateur);
+		return formateur;
 
 	}
 
 	@Override
-	public FormateurDTO update(FormateurDTO formateurDTO) {
+	public Formateur update(Formateur formateur) {
 
-		Formateur formateur = formateurMapper.DTOToformateur(formateurDTO);
 		FORMATEURS.put(formateur.getId(), formateur);
-		return formateurMapper.formateurToDTO(formateur);
+		return formateur;
 
 	}
 
 	@Override
-	public FormateurDTO delete(FormateurDTO formateurDTO) {
-		Formateur formateur = formateurMapper.DTOToformateur(formateurDTO);
-		FORMATEURS.remove(formateur.getId());
-		return formateurMapper.formateurToDTO(formateur);
+	public boolean delete(Formateur formateur) {
+
+		Object f =  FORMATEURS.remove(formateur.getId());
+		return (f!=null);
 	}
 
 	@Override
-	public FormateurDTO findById(Long id) {
-
+	public Optional<Formateur> findById(Long id) {
 		Formateur formateur = FORMATEURS.get(id);
-		return formateurMapper.formateurToDTO(formateur);
+		return  Optional.ofNullable(formateur) ;
 
 	}
 
 	@Override
-	public FormateurDTO findAll() {
+	public List<Formateur> findAll() {
 		List<Formateur> formateurs = new ArrayList(FORMATEURS.values());
-		FormateurDTO dto = new FormateurDTO();
-		dto.setFormateurs(formateurs);
-		return dto;
+		return formateurs;
 
 	}
 
 	@Override
-	public FormateurDTO deleteById(Long id) {
-
-		FORMATEURS.remove(id);
-		FormateurDTO dto = new FormateurDTO();
-		return dto;
+	public boolean deleteById(Long id) {
+		Object f =  FORMATEURS.remove(id);
+		return (f!=null);
 	}
 
 	@Override
 	public FormateurDTO findByDiscipline(FormateurDTO dto) {
-		
+
 		Discipline discipline = dto.getDiscipline();
-		dto.setFormateurs(DISCIPLINE_FORMATEUR.get(discipline));
+		dto.setListEntity(DISCIPLINE_FORMATEUR.get(discipline));
 
 		return dto;
 	}

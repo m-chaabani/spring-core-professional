@@ -38,15 +38,15 @@ public class FormationBusiness implements IFormationService {
 
 		// creation formateur
 		FormateurDTO formateurDTO = new FormateurDTO();
-		formateurDTO.setFormateur(formationDto.getFormateur());
+		formateurDTO.setEntity(formationDto.getFormateur());
 		formateurDTO = (FormateurDTO) formateurBusiness.enregistrer(formateurDTO);
 
 		// creation formation
 		Formation formation = formationDto.getFormation();
 		formation.setCreatedAt(LocalDate.now());
 		formation.setModifiedAt(LocalDate.now());
-
-		formationDto = formationDao.create(formationDto);
+		;
+		formationDto.setEntity( formationDao.create(formationDto.getEntity()) );
 
 		return formationDto;
 	}

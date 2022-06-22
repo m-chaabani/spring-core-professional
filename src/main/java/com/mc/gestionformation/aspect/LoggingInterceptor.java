@@ -37,7 +37,7 @@ public class LoggingInterceptor {
 	private void BeforeIFormateurService(JoinPoint joinPoint, FormateurDTO dto) {
 		Logger logger = LoggerFactory.getLogger(joinPoint.getClass());
 		System.out.print("BeforeIFormateurService : Log is acting on method named : "
-				+ joinPoint.getSignature().getName() + "with arguments " + dto.getFormateur().toString());
+				+ joinPoint.getSignature().getName() + "with arguments " + dto.getEntity().toString());
 
 	}
 

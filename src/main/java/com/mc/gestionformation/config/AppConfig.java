@@ -27,7 +27,7 @@ public class AppConfig {
 	@Bean(name = "formateurDto1")
 	FormateurDTO formateurDto2() {
 		FormateurDTO formateurDTO = new FormateurDTO();
-		formateurDTO.setFormateur(formateur1());
+		formateurDTO.setEntity(formateur1());
 		return formateurDTO;
 	}
 

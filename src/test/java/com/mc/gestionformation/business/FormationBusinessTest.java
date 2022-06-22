@@ -94,13 +94,13 @@ public class FormationBusinessTest {
 		formateur.setId(4L);
 		formateur.setNom("Test Nom");
 		formateur.setPrenom("Test Prenom");
-		formationDto.setFormateur(formateur);
+		formationDto.setEntity(formateur);
 		
 		//formateurBusines.findById(formationDto);
 
 		FormateurDTO formationDtoResult = formateurBusines.enregistrer(formationDto);
 		assertNotNull(formationDtoResult);
-		assertNotNull(formationDtoResult.getFormateur());
+		assertNotNull(formationDtoResult.getEntity());
 
 	}
 
