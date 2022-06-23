@@ -1,4 +1,4 @@
-package com.mc.gestionformation.integration.dao;
+package com.mc.gestionformation.integration.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mc.gestionformation.dto.FormateurDTO;
+import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;
 
 @Repository

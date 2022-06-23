@@ -3,16 +3,23 @@ package com.mc.gestionformation.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+@Entity
 public class Formateur extends AbstractEntity {
 
-	
+	@Column(name = "FIRST_NAME")
 	private String nom;
+	@Column(name = "LAST_NAME")
 	private String prenom;
+
+	@Transient
 	private Utilisateur user;
-	
+	@Transient
 	private Set<Formation> formations = new HashSet<Formation>();
-	
-	
+
 	public Formateur() {
 	}
 
@@ -50,7 +57,7 @@ public class Formateur extends AbstractEntity {
 	public void setUser(Utilisateur user) {
 		this.user = user;
 	}
-	
+
 	public Set<Formation> getFormations() {
 		return formations;
 	}
@@ -59,8 +66,8 @@ public class Formateur extends AbstractEntity {
 		this.formations = formations;
 	}
 
-
 	@Override
+	@Transient
 	public String toString() {
 		return "Formateur [nom=" + nom + ", prenom=" + prenom + ", user=" + user + ", id=" + id + ", createdAt="
 				+ createdAt + ", modifiedAt=" + modifiedAt + "]";

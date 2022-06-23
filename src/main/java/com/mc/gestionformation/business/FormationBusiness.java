@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.autoproxy.InfrastructureAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.dto.FormationDTO;
+import com.mc.gestionformation.integration.dao.IDAO;
 import com.mc.gestionformation.integration.dao.IFormationDAO;
 import com.mc.gestionformation.model.Formation;
 import com.mc.gestionformation.service.IFormateurService;
 
 @Service("formationBusiness")
-public class FormationBusiness implements IFormationService {
+@Transactional(transactionManager = "dataSourceTransactionManager")
+public class FormationBusiness extends AbstractCRUDBusiness<FormationDTO> implements IFormationService {
 
 	private static Logger logger = LoggerFactory.getLogger(FormationBusiness.class);
 
@@ -33,7 +34,6 @@ public class FormationBusiness implements IFormationService {
 		logger.info("[bean creation from FormationBusiness with 2-arg constructor]");
 	}
 
-	@Transactional
 	public FormationDTO enregistrer(FormationDTO formationDto) {
 
 		// creation formateur
@@ -46,13 +46,18 @@ public class FormationBusiness implements IFormationService {
 		formation.setCreatedAt(LocalDate.now());
 		formation.setModifiedAt(LocalDate.now());
 		;
-		formationDto.setEntity( formationDao.create(formationDto.getEntity()) );
+		formationDto.setEntity(formationDao.create(formationDto.getEntity()));
 
 		return formationDto;
 	}
 
 	public FormationDTO findById(FormationDTO formateurDto) {
 		return formateurDto;
+	}
+
+	@Override
+	IDAO<Formation> getRepo() {
+		return formationDao;
 	}
 
 }

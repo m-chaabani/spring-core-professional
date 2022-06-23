@@ -5,3 +5,4 @@ import com.mc.gestionformation.model.Participant;
 public interface IParticipantDAO extends IDAO<Participant> {
 
 }
+	

@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,12 +28,13 @@ import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.model.Formation;
 
 @Repository
+@Primary
 public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 
 	private static Logger logger = LoggerFactory.getLogger(FormateurDAOJdbcTemplate.class);
 
-	private static final String TABLE_NAME_FORMATEUR = "FORMATEUR_TEST";
-	private static final String TABLE_NAME_FORMATION = "FORMATION_TEST";
+	private static final String TABLE_NAME_FORMATEUR = "FORMATEUR";
+	private static final String TABLE_NAME_FORMATION = "FORMATION";
 
 	private class FormateurMapper implements RowMapper<Formateur> {
 

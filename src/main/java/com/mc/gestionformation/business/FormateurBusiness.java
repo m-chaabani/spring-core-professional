@@ -11,14 +11,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mc.gestionformation.dto.FormateurDTO;
+import com.mc.gestionformation.integration.dao.IDAO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;
 import com.mc.gestionformation.service.IFormateurService;
 
 @Service("formateurBusiness")
-public class FormateurBusiness implements IFormateurService {
+public class FormateurBusiness extends AbstractCRUDBusiness<FormateurDTO> implements IFormateurService {
 	private static Logger logger = LoggerFactory.getLogger(FormateurBusiness.class);
-	IFormateurDAO formateurDao = null;
+	private IFormateurDAO formateurDao = null;
 
 	@Autowired
 	public FormateurBusiness(IFormateurDAO formateurDao) {
@@ -28,10 +29,8 @@ public class FormateurBusiness implements IFormateurService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public FormateurDTO enregistrer(FormateurDTO formateurDto) {
 		
-		formateurDto = this.findById(formateurDto);
 		Formateur formateur = formateurDto.getEntity();
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
@@ -49,6 +48,11 @@ public class FormateurBusiness implements IFormateurService {
 		formateur.setCreatedAt(LocalDate.now());
 		formateur.setModifiedAt(LocalDate.now());
 		return formateurDto;
+	}
+
+	@Override
+	IDAO getRepo() {
+		return formateurDao;
 	}
 
 }

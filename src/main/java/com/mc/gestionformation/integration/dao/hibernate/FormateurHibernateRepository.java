@@ -1,6 +1,5 @@
-package com.mc.gestionformation.integration.dao;
+package com.mc.gestionformation.integration.dao.hibernate;
 
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository

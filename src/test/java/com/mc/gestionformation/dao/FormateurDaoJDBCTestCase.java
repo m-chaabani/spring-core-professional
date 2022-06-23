@@ -17,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mc.gestionformation.dto.FormateurDTO;
-import com.mc.gestionformation.integration.dao.FormateurDaoJDBC;
+import com.mc.gestionformation.integration.dao.jdbc.FormateurDaoJDBC;
 import com.mc.gestionformation.model.Formateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
