@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.mc.gestionformation.dto.AbstractDTO;
 import com.mc.gestionformation.integration.dao.IDAO;
 import com.mc.gestionformation.model.AbstractEntity;
 
+@Transactional
 public abstract class AbstractCRUDBusiness<D extends AbstractDTO> {
 
-	abstract IDAO getRepo();
+	protected abstract IDAO getRepo();
 
 	public D create(D dto) {
 		dto.setEntity(getRepo().create(dto.getEntity()));
@@ -30,6 +33,8 @@ public abstract class AbstractCRUDBusiness<D extends AbstractDTO> {
 		Optional<AbstractEntity> opt = getRepo().findById(dto.getEntity().getId());
 		AbstractEntity entity = opt.isPresent() ? opt.get() : null;
 		dto.setEntity(entity);
+		if (entity != null)
+			entity.toString();
 		return dto;
 	}
 

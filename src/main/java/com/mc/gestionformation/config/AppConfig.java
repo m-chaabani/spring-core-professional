@@ -18,7 +18,7 @@ import com.mc.gestionformation.model.Formateur;
 @Configuration
 @ComponentScan(basePackages = "com.mc")
 @Import({DataSourceCfg.class,TransactionConfig.class})
-@EnableAspectJAutoProxy(proxyTargetClass = true) // activation de la prise en charge des aspects par ASPECTJ
+@EnableAspectJAutoProxy() // activation de la prise en charge des aspects par ASPECTJ
 public class AppConfig {
 
 	Logger logger = LoggerFactory.getLogger(AppConfig.class);

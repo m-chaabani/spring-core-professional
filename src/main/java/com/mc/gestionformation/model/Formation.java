@@ -2,9 +2,15 @@ package com.mc.gestionformation.model;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Formation extends AbstractEntity {
 
 	private String code;
@@ -12,9 +18,14 @@ public class Formation extends AbstractEntity {
 	private String description;
 	private String preprequis;
 	private Duration duree;
-	private Discipline discipline;
 
-	
+	@ManyToOne
+	@JoinColumn(name = "formateur_id", referencedColumnName = "id")
+	private Formateur formateur;
+
+	@ManyToOne
+	@JoinColumn(name = "discipline_id", referencedColumnName = "id")
+	private Discipline discipline;
 
 	public Formation() {
 		// TODO Auto-generated constructor stub
@@ -78,8 +89,13 @@ public class Formation extends AbstractEntity {
 		return "Formation [code=" + code + ", titre=" + titre + ", description=" + description + ", preprequis="
 				+ preprequis + ", duree=" + duree + ", discipline=" + discipline + "]";
 	}
-	
-	
 
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.mc.gestionformation.business;
+package com.mc.gestionformation.business.impl;
 
 import java.time.LocalDate;
 
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mc.gestionformation.business.AbstractCRUDBusiness;
+import com.mc.gestionformation.business.IFormationService;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.dto.FormationDTO;
 import com.mc.gestionformation.integration.dao.IDAO;
@@ -42,7 +44,7 @@ public class FormationBusiness extends AbstractCRUDBusiness<FormationDTO> implem
 		formateurDTO = (FormateurDTO) formateurBusiness.enregistrer(formateurDTO);
 
 		// creation formation
-		Formation formation = formationDto.getFormation();
+		Formation formation = formationDto.getEntity();
 		formation.setCreatedAt(LocalDate.now());
 		formation.setModifiedAt(LocalDate.now());
 		;
@@ -56,7 +58,7 @@ public class FormationBusiness extends AbstractCRUDBusiness<FormationDTO> implem
 	}
 
 	@Override
-	IDAO<Formation> getRepo() {
+	protected IDAO getRepo() {
 		return formationDao;
 	}
 

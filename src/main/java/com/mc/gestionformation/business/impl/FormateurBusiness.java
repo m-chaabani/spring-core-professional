@@ -1,15 +1,14 @@
-package com.mc.gestionformation.business;
+package com.mc.gestionformation.business.impl;
 
 import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mc.gestionformation.business.AbstractCRUDBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IDAO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
@@ -51,6 +50,7 @@ public class FormateurBusiness extends AbstractCRUDBusiness<FormateurDTO> implem
 	}
 
 	@Override
+	protected
 	IDAO getRepo() {
 		return formateurDao;
 	}

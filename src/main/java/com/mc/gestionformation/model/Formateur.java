@@ -3,21 +3,37 @@ package com.mc.gestionformation.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
 public class Formateur extends AbstractEntity {
 
-	@Column(name = "FIRST_NAME")
-	private String nom;
-	@Column(name = "LAST_NAME")
-	private String prenom;
+	enum Appreciation {
+		GOOD, MIDIUM, BAD
+	}
 
-	@Transient
+	@Column(name = "FIRST_NAME",length = 60)
+	private String nom;
+
+	@Column(name = "LAST_NAME",length = 60)
+	private String prenom;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length = 10)
+	private Appreciation appreciation ;
+
+	@OneToOne(fetch = FetchType.LAZY)
 	private Utilisateur user;
-	@Transient
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "formateur",fetch = FetchType.EAGER )
 	private Set<Formation> formations = new HashSet<Formation>();
 
 	public Formateur() {

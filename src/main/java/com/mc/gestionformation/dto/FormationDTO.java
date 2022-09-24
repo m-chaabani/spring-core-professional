@@ -9,19 +9,12 @@ import com.mc.gestionformation.model.Support;
 
 public class FormationDTO extends AbstractDTO<Formation> {
 
-	private Formation formation;
 	private Formateur formateur;
 	private Discipline discipline;
 	private List<Support> supports;
 	private List<Formation> formations;
 
-	public Formation getFormation() {
-		return formation;
-	}
-
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
+	
 
 	public Discipline getDiscipline() {
 		return discipline;

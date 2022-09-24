@@ -34,6 +34,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mc.gestionformation.business.impl.FormateurBusiness;
+import com.mc.gestionformation.business.impl.FormationBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.jdbctemplate.FormateurDAOJdbcTemplate;
 import com.mc.gestionformation.integration.dao.jdbctemplate.FormationDAOJdbcTemplate;

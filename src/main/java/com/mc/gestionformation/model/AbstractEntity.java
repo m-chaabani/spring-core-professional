@@ -7,19 +7,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(updatable = false)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
+
+	// @Version
 	protected String version;
+
+	@Column(name = "CREATED_AT")
+	// @Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate createdAt;
+
+	@Column(name = "MODIFIED_AT")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate modifiedAt;
 
 	public AbstractEntity() {
+
+	}
+
+	public AbstractEntity(Long id) {
+		super();
+		this.id = id;
 
 	}
 

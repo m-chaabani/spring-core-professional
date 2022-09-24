@@ -7,15 +7,13 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mc.gestionformation.business.FormateurBusiness;
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.config.AppConfig;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.model.Formateur;

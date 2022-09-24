@@ -1,6 +1,12 @@
 package com.mc.gestionformation.business;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,13 +15,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.core.annotation.Order;
-import org.springframework.dao.support.DaoSupport;
 
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
-import com.mc.gestionformation.integration.dao.inmem.FormateurDaoInMemory;
 import com.mc.gestionformation.model.Formateur;
-import static org.easymock.EasyMock.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FormateurBusinessEasyMockTest_1 {

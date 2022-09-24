@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.core.annotation.Order;
 
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.inmem.FormateurDaoInMemory;
 import com.mc.gestionformation.model.Formateur;

@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.mc.gestionformation.business.FormateurBusiness;
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;

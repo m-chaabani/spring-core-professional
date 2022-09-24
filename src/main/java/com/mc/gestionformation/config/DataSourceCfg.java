@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -21,6 +20,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 @Configuration
 @PropertySources({ @PropertySource("classpath:db/db.properties"),
@@ -107,18 +107,26 @@ public class DataSourceCfg {
 
 	@Bean
 	SessionFactory sessionFactory() {
-		return new LocalSessionFactoryBuilder(dataSource()).scanPackages("com.mc.gestionformation.model")
-				.addProperties(hibernateProperties()).buildSessionFactory();
+		
+		LocalSessionFactoryBuilder  sessionFactoryBuilder = new LocalSessionFactoryBuilder(dataSource()); 
+		sessionFactoryBuilder.scanPackages("com.mc.gestionformation.model");
+		sessionFactoryBuilder.addProperties(  hibernateProperties()  );
+		
+		return sessionFactoryBuilder.buildSessionFactory();
 	}
 
 	@Bean
 	public Properties hibernateProperties() {
 		Properties hibernateProp = new Properties();
+		// préparation du DIALECT qui spécifie la syntaxe SQL relatif à la base de données 
 		hibernateProp.put("hibernate.dialect", dialect);
+		
+		//Cela permet de creer les Table de la base à partir des classes JAVA via les metadonnées
 		hibernateProp.put("hibernate.hbm2ddl.auto", hbm2ddl);
+		hibernateProp.put("hibernate.show_sql", show_sql);
 		hibernateProp.put("hibernate.format_sql", format_sql);
 		hibernateProp.put("hibernate.use_sql_comments", true);
-		hibernateProp.put("hibernate.show_sql", show_sql);
+		
 		return hibernateProp;
 	}
 

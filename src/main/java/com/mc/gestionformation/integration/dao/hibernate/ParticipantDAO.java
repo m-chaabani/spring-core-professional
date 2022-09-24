@@ -1,6 +1,7 @@
 package com.mc.gestionformation.integration.dao.hibernate;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.Session;
@@ -52,12 +53,29 @@ public class ParticipantDAO implements IParticipantDAO {
 
 	@Override
 	public Optional<Participant> findById(Long id) {
-		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session
+		.createQuery("from Participant p where p.id= ?")
+		.setParameter(0, id)
+		.uniqueResult();
+		session.createQuery("FROM Person").list();
 		return null;
 	}
 
 	@Override
 	public Collection<Participant> findAll() {
+
+		return null;
+	}
+
+	@Override
+	public List<Participant> findMatriculeIn(String matricule, String... matricules) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Participant> findByAdresse(String adresse) {
 		// TODO Auto-generated method stub
 		return null;
 	}

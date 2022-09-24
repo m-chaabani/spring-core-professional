@@ -1,6 +1,9 @@
 package com.mc.gestionformation.business;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -9,7 +12,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mc.gestionformation.business.FormateurBusiness;
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.integration.dao.IFormateurDAO;
 import com.mc.gestionformation.model.Formateur;

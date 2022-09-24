@@ -15,7 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mc.gestionformation.business.FormateurBusiness;
+import com.mc.gestionformation.business.impl.FormateurBusiness;
 import com.mc.gestionformation.config.AppConfig;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.model.Formateur;

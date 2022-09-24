@@ -13,6 +13,7 @@ public class FormateurDTO extends AbstractDTO<Formateur> {
 
 	public List<Formation> getFormations() {
 		return formations;
+		
 	}
 
 	public void setFormations(List<Formation> formations) {

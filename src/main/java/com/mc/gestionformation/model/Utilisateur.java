@@ -1,13 +1,19 @@
 package com.mc.gestionformation.model;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+@Entity
 public class Utilisateur extends AbstractEntity {
 
 	private String username;
 	private String password;
 	private String email;
 
+	@Transient
 	private Set<Role> roles = new HashSet<>();
 
 	public Utilisateur() {
