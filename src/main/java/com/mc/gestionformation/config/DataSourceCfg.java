@@ -56,6 +56,7 @@ public class DataSourceCfg {
 
 
 	@Bean
+	@Profile("test")
 	DataSource datasourceValue() {
 
 		DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -96,6 +97,7 @@ public class DataSourceCfg {
 	}
 	
 	@Bean
+	@Primary
 	JdbcTemplate jdbcTempalte() {
 		return new JdbcTemplate(dataSource());
 	}
