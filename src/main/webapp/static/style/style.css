@@ -1,0 +1,47 @@
+@charset "ISO-8859-1";
+
+div#content div {
+	display: inline-block;
+	width: 48%;
+}
+
+div#content div.right {
+	vertical-align: top;
+	
+}
+
+div#content div.left {
+	vertical-align: top;
+	
+}
+
+nav.nav-main ul li {
+		display: inline-block;
+}
+
+nav.nav-main ul li.btn {
+	list-style-type: none;
+	text-decoration: none;
+}
+
+nav.nav-main ul li.btn a {
+	color: white;
+	background-color: grey;
+	display: inline-block;
+	text-decoration: none;
+	padding: 10px;
+}
+
+nav.nav-main ul li:hover a {
+	color: red;
+	background-color: white;
+}
+
+
+header {
+	background-color: grey;
+}
+
+footer {
+	background-color: grey;
+}

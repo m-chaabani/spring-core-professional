@@ -5,12 +5,20 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Utilisateur extends AbstractEntity {
 
+	@NotNull
 	private String username;
+	
+	@NotEmpty
 	private String password;
+	
+	@org.hibernate.validator.constraints.Email
 	private String email;
 
 	@Transient
