@@ -4,18 +4,21 @@ import java.time.Duration;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Formation extends AbstractEntity {
 
+	@NotNull(message = "Le code de la formation ne doit pas etre null")
 	private String code;
+	@NotNull(message = "Le code de la formation ne doit pas etre null")
 	private String titre;
+
 	private String description;
+	@Size(min = 10, max = 256)
 	private String preprequis;
 	private Duration duree;
 

@@ -18,7 +18,7 @@
 		<ul>
 			<li class="btn"><a href="#">Accueil</a></li>
 			<li class="btn"><a href="#">Formations</a></li>
-			<li class="btn"><a href="#">Actualité</a></li>
+			<li class="btn"><a href="#">Formateurs</a></li>
 			<li class="btn"><a href="#">Inscription</a></li>
 			<li class="btn"><a href="#">Contact</a></li>
 		</ul>
@@ -26,12 +26,8 @@
 
 	<div id="content">
 
-		<div class="left">
-			<p>left content</p>
-		</div>
-		<div class="right">
-		
-		</div>
+
+		<div class="right">Bonjour ${session.user.username}</div>
 
 
 	</div>

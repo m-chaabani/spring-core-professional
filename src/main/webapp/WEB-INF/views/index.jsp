@@ -26,11 +26,25 @@
 
 	<div id="content">
 
-		<div class="left">
-			<p>left content</p>
-		</div>
+	
 		<div class="right">
-		
+			<spring:form method="post" action="j_security_check"
+				modelAttribute="user">
+				<table>
+					<tr>
+						<td>username:</td>
+						<td><spring:input path="username" /></td>
+					</tr>
+					<tr>
+						<td>login:</td>
+						<td><spring:input path="password" /></td>
+					</tr>
+					<tr>
+						<td><input type="submit"  value="se connecter" /></td>
+						<td></td>
+					</tr>
+				</table>
+			</spring:form>
 		</div>
 
 
