@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/main">
+<head layout:fragment="html_header(Creation formation)">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+		<div class="container">
+			<form action="#" th:action="@{/formation/persist}" method="post"
+				th:object="${formation}">
+
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<label th:text="#{formation.code}">Code Formation:</label> <input
+						id="code" type="text" class="form-control" th:field="*{code}" />
+					<p th:if="${#fields.errors('code')}" class="error" th:text=${err}>Invalid Value</p>
+				</div>
+
+				<div class="form-group">
+					<label th:text="#{formation.titre}">Titre Formation:</label> <input
+						id="titre" type="text" class="form-control" th:field="*{titre}" />
+						<p th:if="${#fields.errors('titre')}" class="error" th:text=${err}>Invalid Value</p>
+				</div>
+				<div class="form-group">
+					<label th:text="#{formation.desc}">Description:</label>
+					<textarea id="desc" rows="5" cols="25" th:field="*{description}"
+						class="form-control"></textarea>
+						<p th:if="${#fields.errors('description')}" class="error" th:text=${err}>Invalid Value</p>
+				</div>
+				<button type="submit">Enregistrer</button>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

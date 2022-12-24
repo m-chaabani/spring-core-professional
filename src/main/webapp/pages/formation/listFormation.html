@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/main">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID Formation</th>
+								<th>Titre Formation</th>
+								<th>Code Formation</th>
+								<th><a th:href="@{/formation/showEditForm}"
+									class="btn btn-dark">Add</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="formation : ${formations}">
+								<td th:text="${formation.id}" />
+								<td th:text="${formation.code}" />
+								<td th:text="${formation.titre}" />
+								<td><a
+									th:href="@{/formation/showEditForm/{id}(id=${formation.id})}"
+									class="btn btn-primary">Edit</a> <a
+									th:href="@{/formation/delete/{id}(id=${formation.id})}"
+									class="btn btn-danger">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

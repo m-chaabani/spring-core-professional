@@ -74,7 +74,7 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 	}
 
 	@Override
-	public boolean delete(Formateur formateur) {
+	public void delete(Formateur formateur) {
 		int impactedRows = 0;
 		try (Connection conn = dataSource.getConnection();) {
 
@@ -87,12 +87,10 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 			new RuntimeException(exception);
 		}
 
-		return !(impactedRows == 0);
-
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		int impactedRows = 0;
 		try (Connection conn = dataSource.getConnection();) {
 
@@ -105,7 +103,6 @@ public class FormateurDaoJDBC implements IFormateurDAO {
 			new RuntimeException(exception);
 		}
 
-		return !(impactedRows == 0);
 	}
 
 	@Override

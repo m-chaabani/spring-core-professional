@@ -74,10 +74,9 @@ public class FormateurDaoInMemory implements IFormateurDAO {
 	}
 
 	@Override
-	public boolean delete(Formateur formateur) {
+	public void delete(Formateur formateur) {
 
 		Object f =  FORMATEURS.remove(formateur.getId());
-		return (f!=null);
 	}
 
 	@Override
@@ -95,9 +94,8 @@ public class FormateurDaoInMemory implements IFormateurDAO {
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		Object f =  FORMATEURS.remove(id);
-		return (f!=null);
 	}
 
 	@Override

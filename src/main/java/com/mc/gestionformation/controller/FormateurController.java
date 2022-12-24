@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mc.gestionformation.aspect.Loggable;
 import com.mc.gestionformation.dto.FormateurDTO;
 import com.mc.gestionformation.service.IFormateurService;
 
-@Component
-@Loggable
+@Controller
+
 public class FormateurController {
 	
 	
@@ -38,14 +39,6 @@ public class FormateurController {
 		System.out.println(" Formateur enregistré avec success : " + formateurdto.getEntity());
 	}
 
-	public FormateurDTO getFormateurdto() {
-		return formateurdto;
-	}
 
-	@Autowired
-	public void setFormateurdto(@Qualifier("formateurDto1")FormateurDTO formateurdto) {
-		System.out.println("[ formateurdto in Controller ] : " + formateurdto);
-		this.formateurdto = formateurdto;
-	}
 
 }

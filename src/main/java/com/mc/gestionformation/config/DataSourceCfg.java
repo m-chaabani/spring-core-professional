@@ -53,22 +53,6 @@ public class DataSourceCfg {
 	@Value("${hibernate.hbm2ddl}")
 	private String hbm2ddl;
 
-
-
-	@Bean
-	@Profile("test")
-	DataSource datasourceValue() {
-
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setUsername(username);
-		ds.setPassword(password);
-		ds.setUrl(url);
-		ds.setDriverClassName(driverClassName);
-		return ds;
-	}
-	
-	
-
 	@Bean
 	@Primary
 	public DataSource dataSource() {
@@ -86,16 +70,7 @@ public class DataSourceCfg {
 		}
 	}
 
-	@Bean
-	@Profile("test")
-	DataSource datasourceTest() {
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		DataSource ds = builder.setType(EmbeddedDatabaseType.H2).addScript("classpath:db/schema_test.sql")
-				.addScript("classpath:db/data-test.sql").build();
-		return ds;
-
-	}
-	
+		
 	@Bean
 	@Primary
 	JdbcTemplate jdbcTempalte() {
@@ -132,10 +107,6 @@ public class DataSourceCfg {
 		return hibernateProp;
 	}
 
-	@Override
-	public String toString() {
-		return "DataSourceCfg [driverClassName=" + driverClassName + ", url=" + url + ", username=" + username
-				+ ", password=" + password + "]";
-	}
+
 
 }

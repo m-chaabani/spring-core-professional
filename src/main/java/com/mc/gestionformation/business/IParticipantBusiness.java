@@ -20,7 +20,7 @@ public interface IParticipantBusiness extends ICRUDBusiness<ParticipantDTO> {
 
 	ParticipantDTO update(ParticipantDTO dto);
 
-	boolean delete(ParticipantDTO dto);
+	void delete(ParticipantDTO dto);
 
 	ParticipantDTO findById(ParticipantDTO dto);
 

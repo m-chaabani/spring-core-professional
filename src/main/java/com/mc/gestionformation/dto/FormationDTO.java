@@ -16,7 +16,18 @@ public class FormationDTO extends AbstractDTO<Formation> {
 
 	
 
+	public FormationDTO() {
+		super();
+
+	}
+
+	public FormationDTO(Formation formation) {
+		super(formation);
+
+	}
+
 	public Discipline getDiscipline() {
+		
 		return discipline;
 	}
 

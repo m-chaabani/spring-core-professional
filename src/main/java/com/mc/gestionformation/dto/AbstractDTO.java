@@ -11,6 +11,17 @@ public abstract class AbstractDTO<T extends AbstractEntity> {
 	private T entity;
 	private List<T> listEntity;
 	
+	
+	
+	public AbstractDTO() {
+		super();
+	}
+
+	public AbstractDTO(T entity) {
+		super();
+		this.entity = entity;
+	}
+
 	protected List<Throwable> erreurs = new ArrayList<>();
 	protected boolean hasErros;
 

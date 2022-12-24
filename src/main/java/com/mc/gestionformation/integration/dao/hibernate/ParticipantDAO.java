@@ -39,16 +39,16 @@ public class ParticipantDAO implements IParticipantDAO {
 	}
 
 	@Override
-	public boolean delete(Participant participant) {
+	public void delete(Participant participant) {
 		 Session session = sessionFactory.getCurrentSession();
 	        session.delete(participant);
-		return true;
+
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
-		return false;
+
 	}
 
 	@Override

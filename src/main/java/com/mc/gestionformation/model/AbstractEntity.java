@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public abstract class AbstractEntity {
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
 
 	// @Version

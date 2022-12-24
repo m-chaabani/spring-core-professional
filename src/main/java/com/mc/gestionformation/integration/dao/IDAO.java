@@ -11,9 +11,9 @@ public interface IDAO<T extends AbstractEntity> {
 
 	T update(T entity);
 
-	boolean delete(T entity);
+	void delete(T entity);
 
-	boolean deleteById(Long id);
+	void deleteById(Long id);
 
 	Optional<T> findById(Long id);
 

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.servlet.HandlerMapping;
 
 @Controller
-@ResponseBody
 @SessionScope
 public class HomeCtr {
-
+HandlerMapping h;
 	@RequestMapping("/acceuil?id=2")
 	// @ResponseBody
 	public String index(HttpServletRequest request, Writer writer, @RequestHeader("HOST") String host2,

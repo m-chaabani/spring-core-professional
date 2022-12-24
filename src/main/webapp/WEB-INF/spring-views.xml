@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="showPerson"
+	<bean id="/showPerson"
 		class="org.springframework.web.servlet.view.JstlView">
 		<property name="url" value="/WEB-INF/views/persons/showPerson.jsp" />
 	</bean>

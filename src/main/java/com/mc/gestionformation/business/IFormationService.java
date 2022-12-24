@@ -2,8 +2,8 @@ package com.mc.gestionformation.business;
 
 import com.mc.gestionformation.dto.FormationDTO;
 
-public interface IFormationService {
+public interface IFormationService extends ICRUDBusiness<FormationDTO>{
 	
-	  FormationDTO enregistrer(FormationDTO formationDto);
+	 
 
 }

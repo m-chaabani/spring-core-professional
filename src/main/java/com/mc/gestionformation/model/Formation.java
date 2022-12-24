@@ -17,9 +17,11 @@ public class Formation extends AbstractEntity {
 	@NotNull(message = "Le code de la formation ne doit pas etre null")
 	private String titre;
 
+	@Size(min = 10, max = 500, message = "#{formation.description.error}")
 	private String description;
-	@Size(min = 10, max = 256)
+	
 	private String preprequis;
+	
 	private Duration duree;
 
 	@ManyToOne
@@ -30,8 +32,20 @@ public class Formation extends AbstractEntity {
 	@JoinColumn(name = "discipline_id", referencedColumnName = "id")
 	private Discipline discipline;
 
+
 	public Formation() {
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+	public Formation(Long id) {
+		super(id);
+	
+	}
+
+
+	public Formation(String code, String title) {
+		this.code = code;
+		this.titre = title ;
 	}
 
 	public Formation(Long id, String version, LocalDate createdAt, LocalDate modifiedAt) {
@@ -87,18 +101,18 @@ public class Formation extends AbstractEntity {
 		this.discipline = discipline;
 	}
 
-	@Override
-	public String toString() {
-		return "Formation [code=" + code + ", titre=" + titre + ", description=" + description + ", preprequis="
-				+ preprequis + ", duree=" + duree + ", discipline=" + discipline + "]";
-	}
-
+	
 	public Formateur getFormateur() {
 		return formateur;
 	}
 
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
+	}
+
+	@Override
+	public String toString() {
+		return "Formation [code=" + code + ", titre=" + titre + ", id=" + id + "]";
 	}
 
 }

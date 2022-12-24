@@ -28,9 +28,9 @@ public abstract class CRUDJpaDAO<T extends AbstractEntity, Long> implements  IDA
 	}
 
 	@Override
-	public boolean delete(AbstractEntity participant) {
+	public void delete(AbstractEntity participant) {
 		getEntityManager().remove(participant);
-		return true;
+
 	}
 
 //	@Override

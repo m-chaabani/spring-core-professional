@@ -64,23 +64,21 @@ public class FormationDAOJdbcTemplate implements IFormationDAO {
 	}
 
 	@Override
-	public boolean delete(Formation formation) {
+	public void delete(Formation formation) {
 
 		String sql = "DELETE " + TABLE_NAME_FORMATION + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", formation.getId());
 		int impactedRows =  namedJdbcTemplate.update(sql, /* params */ Map.of("id", formation.getId()));
-		return !(impactedRows==0);
 
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		String sql = "DELETE " + TABLE_NAME_FORMATION + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		int impactedRows =  namedJdbcTemplate.update(sql, /* params */ Map.of("id", id));
-		return !(impactedRows==0);
 	}
 
 	@Override

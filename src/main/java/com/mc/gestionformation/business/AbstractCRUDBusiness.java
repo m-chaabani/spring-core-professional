@@ -25,8 +25,8 @@ public abstract class AbstractCRUDBusiness<D extends AbstractDTO> {
 		return dto;
 	}
 
-	public boolean delete(D dto) {
-		return getRepo().delete(dto.getEntity());
+	public void delete(D dto) {
+		 getRepo().delete(dto.getEntity());
 	}
 
 	public D findById(D dto) {

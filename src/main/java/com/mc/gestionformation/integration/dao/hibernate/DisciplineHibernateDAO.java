@@ -33,19 +33,19 @@ public class DisciplineHibernateDAO implements IDisciplineDAO {
 	}
 
 	@Override
-	public boolean delete(Discipline entity) {
+	public void delete(Discipline entity) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(entity);
-		return true;
+
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		Session session = sessionFactory.getCurrentSession();
 		Discipline d = new Discipline();
 		d.setId(id);
 		session.delete(d);
-		return false;
+
 	}
 
 	@Override

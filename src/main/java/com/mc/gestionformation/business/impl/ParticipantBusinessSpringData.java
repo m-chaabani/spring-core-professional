@@ -42,9 +42,8 @@ public class ParticipantBusinessSpringData implements IParticipantBusiness {
 	}
 
 	@Override
-	public boolean delete(ParticipantDTO dto) {
+	public void delete(ParticipantDTO dto) {
 		 participantDao.delete(dto.getEntity());
-		return false;
 	}
 
 	@Override

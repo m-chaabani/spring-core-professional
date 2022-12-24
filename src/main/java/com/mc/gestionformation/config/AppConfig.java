@@ -16,7 +16,7 @@ import com.mc.gestionformation.model.Formateur;
 
 
 @Configuration
-@ComponentScan(basePackages = "com.mc")
+@ComponentScan(basePackages = "com.mc.gestionformation")
 @Import({DataSourceCfg.class,TransactionConfig.class})
 @EnableAspectJAutoProxy() // activation de la prise en charge des aspects par ASPECTJ
 public class AppConfig {
@@ -28,28 +28,6 @@ public class AppConfig {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
-	@Autowired
-	DataSourceCfg dataSourceCfg;
-	
 
 	
-	@Bean(name = "formateurDto1")
-	FormateurDTO formateurDto2() {
-		FormateurDTO formateurDTO = new FormateurDTO();
-		formateurDTO.setEntity(formateur1());
-		return formateurDTO;
-	}
-
-
-	@Bean
-	Formateur formateur1() {
-		logger.info("Execute method formateur1()");
-		Formateur formateur = new Formateur();
-		formateur.setId(1L);
-		formateur.setPrenom("SALAH");
-		formateur.setNom("BEN MOHAMED");
-		return formateur;
-
-	}
-
 }

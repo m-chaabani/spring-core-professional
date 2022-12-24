@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/static/style/style.css" />
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark" th:fragment="header">
+		<ul>
+			<li class="btn"><a th:href="@{/}"><span
+					th:text="#{menu.welcome}">Accueil</span></a></li>
+			<li class="btn"><a th:href="@{/formation/list}"><span
+					th:text="#{menu.formation}">Formations</span></a></li>
+			<li class="btn"><a href="#"><span
+					th:text="#{menu.actualite}">Actualité</span></a></li>
+			<li class="btn"><a href="#"><span
+					th:text="#{menu.inscription}">Inscription</span></a></li>
+			<li class="btn"><a href="#"><span th:text="#{menu.contact}">Contact</span></a></li>
+		</ul>
+		<select id="locales">
+			<option value=""></option>
+			<option value="en" th:text="#{lang.eng}"></option>
+			<option value="fr" th:text="#{lang.fr}"></option>
+		</select>
+	</nav>
+
+</body>
+</html>

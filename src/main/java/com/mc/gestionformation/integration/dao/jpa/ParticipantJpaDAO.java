@@ -42,15 +42,13 @@ public class ParticipantJpaDAO implements IParticipantDAO {
 	}
 
 	@Override
-	public boolean delete(Participant participant) {
+	public void delete(Participant participant) {
 		entityManager.remove(participant);
-		return true;
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		entityManager.remove(new Participant(id));
-		return true;
 	}
 
 	@Override

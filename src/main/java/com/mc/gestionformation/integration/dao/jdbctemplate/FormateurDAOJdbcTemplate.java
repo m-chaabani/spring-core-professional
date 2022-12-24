@@ -73,23 +73,23 @@ public class FormateurDAOJdbcTemplate implements IFormateurDAO {
 	}
 
 	@Override
-	public boolean delete(Formateur formateur) {
+	public void delete(Formateur formateur) {
 
 		String sql = "DELETE " + TABLE_NAME_FORMATEUR + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", formateur.getId());
 		int impactedRows = namedJdbcTemplate.update(sql, /* params */ Map.of("id", formateur.getId()));
-		return !(impactedRows==0);
+
 
 	}
 
 	@Override
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) {
 		String sql = "DELETE " + TABLE_NAME_FORMATEUR + " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		int impactedRows = namedJdbcTemplate.update(sql, /* params */ Map.of("id", id));
-		return !(impactedRows==0);
+
 	}
 
 	@Override

@@ -45,3 +45,17 @@ header {
 footer {
 	background-color: grey;
 }
+
+#footer {
+    position: fixed;
+    height: 250px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+.error {
+	color: red;
+}
+

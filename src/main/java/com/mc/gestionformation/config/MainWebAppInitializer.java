@@ -17,12 +17,13 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
 	public void onStartup(final ServletContext sc) throws ServletException { 
 		
 		System.out.println("Sans WEB.XML");
-		 AnnotationConfigWebApplicationContext root = new     
+		AnnotationConfigWebApplicationContext root = new     
 		                             AnnotationConfigWebApplicationContext(); 
 		root.scan("com.mc"); 
 		sc.addListener(new ContextLoaderListener(root)); 
 		ServletRegistration.Dynamic appServlet = sc.addServlet("mvc", new DispatcherServlet(new GenericWebApplicationContext())); appServlet.setLoadOnStartup(1); 
 		appServlet.addMapping("/"); 
+		
 		} 
 
 

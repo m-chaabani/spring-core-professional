@@ -53,13 +53,11 @@ public class FormationBusiness extends AbstractCRUDBusiness<FormationDTO> implem
 		return formationDto;
 	}
 
-	public FormationDTO findById(FormationDTO formateurDto) {
-		return formateurDto;
-	}
-
 	@Override
 	protected IDAO getRepo() {
 		return formationDao;
 	}
+
+
 
 }

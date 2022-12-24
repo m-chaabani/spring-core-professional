@@ -11,7 +11,7 @@ public interface ICRUDBusiness<D extends AbstractDTO> {
 
 	public D update(D dto) ;
 
-	public boolean delete(D dto);
+	public void delete(D dto);
 
 	public D findById(D dto) ;
 
